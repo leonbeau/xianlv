@@ -33,7 +33,7 @@ function EditModal(props) {
         props.form.validateFields((err, values) => {
             if (!err) {
                 props.addNewCategory(values.newCategoryName)
-                // console.log('Received values of form: ', values.newCategoryName);
+                console.log('Received values of form: ', values.newCategoryName);
             }
         });
     };
