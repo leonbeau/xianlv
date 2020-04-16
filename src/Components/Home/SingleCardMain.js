@@ -15,6 +15,7 @@ class SingleCardMain extends Component {
                 <div className="Cards">
 
                     {this.props.homeDishesList.map((item, index) => {
+                        
                         return (
                             <SingleCard key={index} item={item} />
                         )
@@ -34,6 +35,11 @@ class SingleCardMain extends Component {
             </>
         )
     }
+
+    componentDidMount(){
+        //获取所有的分类
+        this.props.getAllCategories()
+    }
 }
 
 
@@ -45,6 +51,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        //获取所有的类别
         getAllCategories: () => {
             dispatch(actionCreators.getAllCategories())
         }

@@ -1,10 +1,13 @@
 
 .rotationChartMain{
   margin: 2rem 0 2rem 0;
-  background: #f4f5f5;
+  background: #fff;
   overflow: hidden;
+  width: 100%;
+  height: 18  rem;
 }
-  .ant-carousel .slick-slide img {
-    width: 100%;
-    height: 100%;
-  }
+
+.rotationChartMain img{
+  width: 100%;
+  height: 100%;
+}

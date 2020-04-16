@@ -5,12 +5,6 @@ import SingleCardMain from '../Components/Home/SingleCardMain'
 import Footer from '../Components/common/Footer'
 import {Row,Col} from 'antd';
 class Home extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-
-        }
-    }
 
     render(){
         return (

@@ -42,7 +42,7 @@ class Header extends Component {
                             <div className="Header_header_inner">
                                 {/* logo */}
                                 <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <Link to="/u">
+                                    <Link to="/">
                                         <span className="inner_logo">
                                             <img alt="" src={logo}></img>
                                         </span>
@@ -74,7 +74,7 @@ class Header extends Component {
                                     }
                                     >
                                     {/* <Menu.ItemGroup> */}
-                                        <Menu.Item key="setting:3"><Link to="/u/me">我的主页</Link></Menu.Item>
+                                        <Menu.Item key="setting:3"><Link to="/me">我的主页</Link></Menu.Item>
                                         <Menu.Item key="setting:4"><a onClick={()=>this.logout()}>退出登录</a></Menu.Item>
                                     {/* </Menu.ItemGroup> */}
                                     </SubMenu>
@@ -82,7 +82,7 @@ class Header extends Component {
                                     
                                     <SubMenu
                                     title={
-                                        <Link to="/u/shoppingcart">
+                                        <Link to="/shoppingcart">
                                         <span className="inner_userBtn">
                                             <Icon type="shopping-cart" /> 购物车
                                         </span>
@@ -94,17 +94,6 @@ class Header extends Component {
                                         {/* <Menu.Item key="setting:2">我购买的商品</Menu.Item> */}
                                     {/* </Menu.ItemGroup> */}
                                    
-                                    </SubMenu>
-
-                                    <SubMenu
-                                    title={
-                                        <Link to="/">
-                                        <span className="inner_userBtn">
-                                            <Icon type="home" /> 主页
-                                        </span>
-                                        </Link>
-                                    }
-                                    >
                                     </SubMenu>
 
                                   

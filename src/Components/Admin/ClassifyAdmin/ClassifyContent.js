@@ -60,7 +60,7 @@ function ClassifyContent(props) {
 
   }
   const showAddModal = ()=>{
-    console.log('zaizhe');
+    // console.log('zaizhe');
     
     props.showAddClassifyModal();
   }

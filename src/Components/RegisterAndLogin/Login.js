@@ -27,19 +27,14 @@ class NormalLoginForm extends React.Component {
 
                 <Form.Item>
                     {getFieldDecorator('username', {
-                        rules: [{ pattern: '^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$', message: '请输入正确的邮箱!' },
+                        rules: [
                                 { required: true, message: '邮箱不能为空' }],
                     })(
                         // 登录
                         <Input
                             size="large"
-                            placeholder="请输入你的登录邮箱"
-                            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            suffix={
-                                <Tooltip title="请输入正确格式的邮箱帐号">
-                                    <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                                </Tooltip>
-                            }
+                            placeholder="请输入你的用户名"
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             
                         />
                     )}

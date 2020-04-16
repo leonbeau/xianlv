@@ -15,5 +15,12 @@ export const CLASSIFY_SHOW_ADD_MODAL =  'classify_show_add_modal';
 export const CLASSIFY_CANCEL_ADD_MODAL =  'classify_cancel_add_modal';
 //删除一个菜品
 export const DELETE_DISH_BY_ID =  'delete_dish_by_id';
+
 //用户部分
 export const HOME_DISHES_LIST = 'home_dishes_list';
+// 获取当前用户信息
+export const GET_ME_MESSAGE = 'get_me_message';
+// 显示用户编辑Modal框 
+export const SHOW_ME_MESSAGE_EDIT_MODAL = 'show_me_message_edit_modal' 
+//关闭
+export const CANCAL_ME_MESSAGE_EDIT_MODAL = 'cancel_me_message_edit_modal' 

@@ -4,8 +4,7 @@ class Footer extends Component{
     render(){
         return (
             <div className="footer">
-                <div>文理订餐平台</div>
-                <div>http://ordering.leondon.cn</div>
+                <div>闲驴二手平台 http://www.xianlv.hooc.top</div>
             </div>
         )
     }
