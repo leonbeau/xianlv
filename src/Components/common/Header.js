@@ -19,8 +19,7 @@ class Header extends Component {
       };
       logout = ()=>{
         const history = createBrowserHistory();
-        sessionStorage.removeItem("isLogin");
-        sessionStorage.removeItem("token");
+        
         this.props.toLogout();
         if(sessionStorage.getItem('isLogin')!== 'true'){
             // history.push('/#/');
@@ -75,7 +74,8 @@ class Header extends Component {
                                     >
                                     {/* <Menu.ItemGroup> */}
                                         <Menu.Item key="setting:3"><Link to="/me">我的主页</Link></Menu.Item>
-                                        <Menu.Item key="setting:4"><a onClick={()=>this.logout()}>退出登录</a></Menu.Item>
+                                        <Menu.Item key="setting:4"><Link to="/publish">我的发布</Link></Menu.Item>
+                                        <Menu.Item key="setting:5"><a onClick={()=>this.logout()}>退出登录</a></Menu.Item>
                                     {/* </Menu.ItemGroup> */}
                                     </SubMenu>
                                     }

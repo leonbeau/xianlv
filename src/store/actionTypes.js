@@ -24,3 +24,5 @@ export const GET_ME_MESSAGE = 'get_me_message';
 export const SHOW_ME_MESSAGE_EDIT_MODAL = 'show_me_message_edit_modal' 
 //关闭
 export const CANCAL_ME_MESSAGE_EDIT_MODAL = 'cancel_me_message_edit_modal' 
+//我发布的商品
+export const MY_PUBLISH_GOODS = 'my_publish_goods'

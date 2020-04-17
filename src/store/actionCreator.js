@@ -153,9 +153,27 @@ export const loginSuccessSaveState = (LoginSuccessObject) => ({
 })
 
 // 登出
-export const logout = () => ({
+export const logoutDispatch = () => ({
     type: actionTypes.TO_LOGIN_OUT
 })
+
+export const logout = () => {
+    const userid = sessionStorage.getItem('isLogin');
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/logout?username='+userid,
+        }).then((res) => {
+            sessionStorage.removeItem("isLogin");
+            dispatch(logoutDispatch());
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}
 
 export const getAllCategoriesList = (categoriesData) => ({
     type: actionTypes.GET_ALL_CATEGORIES,
@@ -234,35 +252,7 @@ export const addDish = (dishObject) => {
 }
 
 
-//添加分类
-export const addCategory = (categoryName) => {
-    return (dispatch) => {
-        let data = {
-            name: categoryName
-        };
-        // console.log('actionCreator data',data); 
-        axios({
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authority': sessionStorage.getItem('token')
-            },
-            url: '/api/m/admin/mealKind/' + categoryName,
-            data: Qs.stringify(data)
-        }).then((res) => {
-            if (res.data.success) {
-                message.success('增加分类成功');
-                history.push('/#/a/classify');
-                setTimeout(() => history.go(), 1600);
-            } else {
-                message.warning(res.data.message);
-            }
 
-        }).catch((error) => {
-            message.error('增加分类失败：', error);
-        })
-    }
-}
 
 //删除分类
 export const deleteCategory = (categoryName) => {
@@ -452,3 +442,71 @@ export const cancelMeMessageEditModal = () => ({
     type: actionTypes.CANCAL_ME_MESSAGE_EDIT_MODAL,
 })
 
+
+
+//编辑个人信息
+export const editMeMessage = (meObj) => {
+    const userid = sessionStorage.getItem('isLogin');
+    return (dispatch) => {
+        let data = {
+            username: userid,
+            password: meObj.newPassword,
+            vx: meObj.newVx,
+            qq: meObj.newQQ,
+            phone:meObj.newPhone ,
+        };
+        // console.log('actionCreator data',data); 
+        axios({
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/updateUser' ,
+            data: data
+        }).then((res) => {
+            if(res.data.code === 1){
+                message.success(res.data.message);
+                history.push('/#/me');
+                setTimeout(() => history.go(), 1600);
+            }else{
+                message.success(res.data.message);
+            }
+            console.log(res);
+
+        }).catch((error) => {
+            message.error('更改个人信息失败：', error);
+        })
+    }
+}
+
+/**
+ *    我的发布页面
+ *    相关接口：查询我发布的商品
+ *             增加发布的商品
+ *             更新发布的商品
+ *             删除发布的商品
+ */
+
+
+//查询我发布的商品
+export const getMyPulishGoodsSave = (data) => ({
+    type: actionTypes.MY_PUBLISH_GOODS,
+    data:data
+})
+
+export const getMyPulishGoods = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/findMyGoods',
+        }).then((res) => {
+           console.log(res);
+           dispatch(getMyPulishGoodsSave(res.data));
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}

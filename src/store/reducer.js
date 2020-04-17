@@ -14,6 +14,7 @@ const defaultState = fromJS({
     homeDishesList: [],
     meMessage: [],
     meMessageEditModalState: false,
+    myPublishGoodsList:[]
 
 });
 
@@ -68,6 +69,8 @@ export default (state = defaultState, action) => {
             return state.set('meMessageEditModalState', true)
         case actionTypes.CANCAL_ME_MESSAGE_EDIT_MODAL:
             return state.set('meMessageEditModalState', false)
+        case actionTypes.MY_PUBLISH_GOODS:
+            return state.set('myPublishGoodsList',action.data)
         default:
             return state;
     }

@@ -32,8 +32,8 @@ function EditModal(props) {
         e.preventDefault();
         props.form.validateFields((err, values) => {
             if (!err) {
-                props.addNewCategory(values.newCategoryName)
-                console.log('Received values of form: ', values.newCategoryName);
+                console.log('Received values of form: ', values);
+                props.editMeMessage(values)
             }
         });
     };
@@ -108,8 +108,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         cancelAddClassifyModal: () => {
             dispatch(actionCreators.cancelMeMessageEditModal())
         },
-        addNewCategory: (categoryName) => {
-            dispatch(actionCreators.addCategory(categoryName))
+        editMeMessage: (MeObj) => {
+            dispatch(actionCreators.editMeMessage(MeObj))
         }
     }
 }
