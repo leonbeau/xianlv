@@ -26,19 +26,25 @@ class DishesAddContent extends React.Component {
         return false
       }
       //上传组件参数
-    uploadPoprs = {
-        name: 'pic',
+      uploadProps = {
+        name: 'file',
         accept: 'image/webp,image/apng,*/*;q=0.8',
-        action: '/api/m/meal/pic',
-        listType:'picture'
+        method: 'post',
+        action: '/api/upload',
+        listType:'picture',
+        // headers: {
+        //    'Content-Type':'multipart/form-data',
+        // },
     };
     //上传完图片执行回调
     onChange(info) {
+        console.log(info);
+        
         if (info.file.status !== 'uploading') {}
         if (info.file.status === 'done') {
             // console.log(info.file, info.fileList);
-            // console.log('从这开始打印success');
-            // console.log(info.file.response.data)
+            console.log('从这开始打印success');
+            console.log(info.file)
         //   this.props.getResponseOfPicURL(info.file.response.data);
           message.success(`${info.file.name} 文件上传成功`);
         } else if (info.file.status === 'error') {
@@ -68,9 +74,9 @@ class DishesAddContent extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                // this.props.toAddDish(values);
-                // this.props.toLogin(values);
+                // console.log('Received values of form: ', values);
+                
+                this.props.toAddGoods(values);
             }
         });
     };
@@ -124,6 +130,30 @@ class DishesAddContent extends React.Component {
 
                                         </Form.Item>
                                         <Form.Item
+                                            label="商品数量"
+                                        >
+                                            {getFieldDecorator('goodsSum', {
+                                                rules: [{ required: true, message: '请输入商品数量' }],
+                                            })(
+                                                // 菜品名
+                                                <Input />
+                                            )}
+
+                                        </Form.Item>
+                                    
+                                        <Form.Item
+                                            label="商品类别"
+                                        >
+                                            {getFieldDecorator('goodsType', {
+                                                rules: [{ required: true, message: '请输入商品类别' }],
+                                            })(
+                                                // 菜品名
+                                                <Input />
+                                            )}
+
+                                        </Form.Item>
+                                        
+                                        {/* <Form.Item
                                             label="商品类型"
                                         >
                                             {getFieldDecorator('goodsType', {
@@ -142,7 +172,7 @@ class DishesAddContent extends React.Component {
                                             </Select>
                                              )}
 
-                                        </Form.Item>
+                                        </Form.Item> */}
                                         <Form.Item
                                             label="商品描述"
                                         >
@@ -154,16 +184,7 @@ class DishesAddContent extends React.Component {
 
                                         </Form.Item>
 
-                                        <Form.Item
-                                            label="商品数量"
-                                        >
-                                            {getFieldDecorator('goodsSum', {
-                                                rules: [{ required: true, message: '请输入商品数量' }],
-                                            })(
-                                                <Input.TextArea />
-                                            )}
-
-                                        </Form.Item>
+                                   
 
 
                                         <Form.Item
@@ -176,7 +197,7 @@ class DishesAddContent extends React.Component {
                                             {getFieldDecorator('dishPicture', {
                                                 rules: [{ required: true, message: '请上传商品图片' }],
                                             })(
-                                                <Upload {...this.uploadPoprs}
+                                                <Upload {...this.uploadProps}
                                                 onChange={(info)=>this.onChange(info)}
                                                 beforeUpload={(file)=>this.beforeUploadMehtod(file)}
                                                 >
@@ -228,8 +249,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getDishesCategories: () => {
             dispatch(actionCreators.getAllCategories())
         },
-        toAddDish:(addFormObj) => {
-            dispatch(actionCreators.addDish(addFormObj))
+        toAddGoods:(addFormObj) => {
+            dispatch(actionCreators.addGoods(addFormObj))
         }
     }
 }

@@ -214,42 +214,6 @@ export const classifyCancelAddModal = () => ({
     type: actionTypes.CLASSIFY_CANCEL_ADD_MODAL
 })
 
-//增加菜品
-export const addDish = (dishObject) => {
-    return (dispatch) => {
-        let data = {
-            name: dishObject.dishName,
-            description: dishObject.dishDescribe,
-            price: parseFloat(dishObject.dishUnitPrice),
-            mealKind: dishObject.dishCategory,
-            picUrl: dishObject.dishPicture.file.response.data
-        }
-        // console.log('actionCreator data',data);
-
-
-
-        axios({
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authority': sessionStorage.getItem('token')
-            },
-            url: '/api/m/admin/meal',
-            data: Qs.stringify(data)
-        }).then((res) => {
-            if (res.data.success) {
-                message.success('增加菜品成功');
-                history.push('/#/a/dishesadd');
-                setTimeout(() => history.go(), 1600);
-            } else {
-                message.warning(res.data.message);
-            }
-
-        }).catch((error) => {
-            message.error('增加菜品失败：', error);
-        })
-    }
-}
 
 
 
@@ -512,3 +476,45 @@ export const getMyPulishGoods = () => {
         })
     }
 }
+
+//增加我发布的商品
+export const addGoods = (goodsObject) => {
+    console.log(goodsObject);
+    
+    return (dispatch) => {
+        let data = {
+            name: goodsObject.goodsName,
+            type: goodsObject.goodsType,
+            price: parseFloat(goodsObject.goodsUnitPrice) ,
+            sum: parseInt(goodsObject.goodsSum),
+            beizhu: goodsObject.goodsDescribe,
+            path:goodsObject.dishPicture.file.response,
+        }
+        // console.log('actionCreator data',data);
+
+
+
+        axios({
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/addGoods',
+            data: data
+        }).then((res) => {
+            console.log(res);
+            
+            if (res.data === "success") {
+                message.success('增加我的发布商品成功');
+                history.push('/#/publish');
+                setTimeout(() => history.go(), 1600);
+            } else {
+                message.warning(res.data.message);
+            }
+
+        }).catch((error) => {
+            message.error('增加商品失败：', error);
+        })
+    }
+}
+
