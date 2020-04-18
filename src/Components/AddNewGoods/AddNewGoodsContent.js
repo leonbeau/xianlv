@@ -1,10 +1,10 @@
 import React from 'react'
 import './AddNewGoodsContent.css';
-import { Row, Col, Form, Input, Upload, Button ,Select,message} from 'antd';
+import {Form, Input, Upload, Button ,message} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import {connect}　from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';
-const { Option } = Select;
+// const { Option } = Select;
 
 class DishesAddContent extends React.Component {
     state = {
@@ -17,13 +17,15 @@ class DishesAddContent extends React.Component {
         // console.log(this.state.fileListLength);
         if(this.state.fileListLength === 0){
             // console.log(this);
-            this.state.fileListLength = this.state.fileListLength+1
+            this.setState({
+                fileListLength:this.state.fileListLength+1
+            })
+            // this.state.fileListLength = this.state.fileListLength+1
             return true  
         }else{
             message.error('只能上传一张图片')
             return false
         }
-        return false
       }
       //上传组件参数
       uploadProps = {

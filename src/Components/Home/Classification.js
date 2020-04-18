@@ -12,7 +12,7 @@ class Classification extends Component {
     
     handleClick = e => {
         const selectKey = e.item.props.eventKey
-        if(selectKey == 'all'){
+        if(selectKey === 'all'){
             this.props.getAllDishes()
         }else{
             this.props.changeHomeDishesList(selectKey)

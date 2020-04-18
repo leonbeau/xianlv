@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Tooltip } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import './Login.css';
 import {connect}　from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Modal, Input, Button } from 'antd';
 import * as actionCreators from '../../store/actionCreator';
 import { connect } from 'react-redux';

@@ -28,7 +28,7 @@ class MyPublishOrder extends Component {
                                 return (
                                     <>
                                         {/* 一个订单 */}
-                                        <div className="single_order">
+                                        <div className="single_order" key={index}>
                                             {/* 图片 */}
                                             <span className="order_food_picture">
                                                 <img src="https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png" alt="" />

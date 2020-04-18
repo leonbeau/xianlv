@@ -67,7 +67,7 @@ export const toRegister = (RegisterObject) => {
             url: '/api/reg',
             data: data
         }).then((res) => {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 // 跳转到登录页
                 message.success(res.data.message);
                 dispatch(toLoginMain());
@@ -126,7 +126,7 @@ export const toLogin = (LoginObject) => {
         }).then((res) => {
             console.log(res);
 
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 console.log(res.data)
                 message.success('登录成功');
                 dispatch(loginSuccessSaveState(res.data.data));
@@ -381,7 +381,7 @@ export const getMeMessage = () => {
             url: '/api/findUser?username=' + userid,
         }).then((res) => {
            console.log(res);
-           if(res.data.status == 1){
+           if(res.data.status === 1){
             dispatch(saveMeMessage(res.data));
            }else{
                message.warning('警告')

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Layout, Breadcrumb } from 'antd';
 import CommonBanner from '../Components/common/CommonBanner';
 import {Row,Col} from 'antd';
 import Footer from '../Components/common/Footer';
 import AddNewGoodsContent from '../Components/AddNewGoods/AddNewGoodsContent';
 // import AddNewGoodsOther from '../Components/AddNewGoods/AddNewGoodsOther';
-const { Content } = Layout;
+// const { Content } = Layout;
 
 class AddNewGoods extends Component {
 
