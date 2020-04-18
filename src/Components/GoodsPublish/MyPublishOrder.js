@@ -21,6 +21,7 @@ class MyPublishOrder extends Component {
                             <Button type="primary">添加新的商品</Button>
                             </Link>
                             
+
                         </div>
 
                         {
@@ -28,10 +29,12 @@ class MyPublishOrder extends Component {
                                 return (
                                     <>
                                         {/* 一个订单 */}
+                    
                                         <div className="single_order" key={index}>
                                             {/* 图片 */}
                                             <span className="order_food_picture">
-                                                <img src="https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png" alt="" />
+                                                <img src={"http://120.79.56.242:8080/"+item.path}/>
+                                                {/* <img src="http://120.79.56.242:8080/{item.path}" alt="" /> */}
                                             </span>
                                             <div className="order_other_things">
                                                 {/* 名称时间数量 */}
