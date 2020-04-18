@@ -11,7 +11,7 @@ export default class GoodsPublish extends Component {
                  <Row type="flex" justify="center" >
                     {/* banner栏 */}
                     <Col xs={24} sm={24} md={16} lg={19} xl={16}>
-                        <CommonBanner commonbannerTitle="我的发布"/>
+                        <CommonBanner commonbannerTitle="我发布的商品"/>
                         {/* 个人信息组件 */}
                         <MyPublishOrder />
                         {/* 页脚 */}

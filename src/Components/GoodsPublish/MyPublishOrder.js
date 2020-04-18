@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import {Button} from 'antd';
+import {Link} from 'react-router-dom';
 import * as actionCreators from '../../store/actionCreator';
 class MyPublishOrder extends Component {
     render() {
         return (
             <>
 
-                <div className="myorder_area">
+                <div className="myorder_area" style={{minHeight:"35rem"}}>
                     {/* 订单为空时 */}
                     {/* <div className="myorder_empty">
                         <div className="empty_text">订单当前为空，赶快下单吧！</div>
@@ -14,8 +16,11 @@ class MyPublishOrder extends Component {
                     {/* 订单不为空时开始 */}
                     <div className="myorder_content">
                         {/* 该区域名 */}
-                        <div className="myorder_title">
-                            我的订单
+                        <div className="myorder_title" style={{textAlign:"right"}}>
+                            <Link to="/addNewGoods">
+                            <Button type="primary">添加新的商品</Button>
+                            </Link>
+                            
                         </div>
 
                         {

@@ -13,7 +13,7 @@ class SingleCardMain extends Component {
             <>
 
                 <div className="Cards">
-
+                
                     {this.props.homeDishesList.map((item, index) => {
                         
                         return (

@@ -7,6 +7,7 @@ import ForgetPassword from './Page/ForgetPassword';
 import SingleFoodDetails from './Page/SingleFoodDetails';
 import UserInformation from './Page/UserInformation';
 import GoodsPublish from './Page/GoodsPublish';
+import AddNewGoods from './Page/AddNewGoods';
 import { HashRouter, Route } from 'react-router-dom';
 // import { HashRouter, Route, Redirect } from 'react-router-dom';
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/foodDetail' exact component={SingleFoodDetails}></Route>
         <Route path='/me' exact component={UserInformation}></Route>
         <Route path='/publish' exact component={GoodsPublish}></Route>
+        <Route path='/addNewGoods' exact component={AddNewGoods}></Route>
         
       </HashRouter>
     </div>

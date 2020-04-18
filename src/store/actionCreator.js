@@ -503,8 +503,10 @@ export const getMyPulishGoods = () => {
             },
             url: '/api/findMyGoods',
         }).then((res) => {
+            if(Array.isArray(res.data)){
+                   dispatch(getMyPulishGoodsSave(res.data));
+            }
            console.log(res);
-           dispatch(getMyPulishGoodsSave(res.data));
         }).catch((error) => {
             message.error('获取失败：', error);
         })
