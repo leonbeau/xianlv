@@ -2,12 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Button} from 'antd';
 import {Link} from 'react-router-dom';
+import EditPublishGoodsModal from './EditPublishGoodsModal';
 import * as actionCreators from '../../store/actionCreator';
 class MyPublishOrder extends Component {
+    deleteGoodsItem(gid){
+        console.log('deleteGoodItem',gid);
+        this.props.deleteGoodsItem(gid)
+    }
+    editGoodsItem(gid){
+        this.props.showPublishGoodsEditModal()
+        console.log('editGoodsItem',gid);
+        // this.props.editGoodsItem(gid)
+    }
     render() {
         return (
             <>
-
                 <div className="myorder_area" style={{minHeight:"35rem"}}>
                     {/* 订单为空时 */}
                     {/* <div className="myorder_empty">
@@ -49,7 +58,8 @@ class MyPublishOrder extends Component {
                                                 </span>
                                                 {/* 状态 */}
                                                 <span className="order_status">
-                                                    已完成
+                                                <Button onClick={()=>this.editGoodsItem(item.gid)} size="small" style={{ marginRight: "1rem" }}>编辑</Button>
+                                                <Button onClick={()=>this.deleteGoodsItem(item.gid)} size="small" type="danger">删除</Button>
                                                 </span>
                                             </div>
 
@@ -68,6 +78,7 @@ class MyPublishOrder extends Component {
                     </div>
                     {/* 订单不为空时结束 */}
                 </div>
+                <EditPublishGoodsModal />
             </>
         )
     }
@@ -84,6 +95,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getMyPulishGoods: () => {
             dispatch(actionCreators.getMyPulishGoods())
+        },
+        deleteGoodsItem:(gid) => {
+            dispatch(actionCreators.deleteGoodsItem(gid))
+        },
+        showPublishGoodsEditModal:()=>{
+            dispatch(actionCreators.showPublishGoodsEditModal())
+        },
+        editGoodsItem:(gid) => {
+            dispatch(actionCreators.editGoodsItem(gid))
         }
     }
 }

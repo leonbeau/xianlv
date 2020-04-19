@@ -1,61 +1,13 @@
-import React from 'react'
-import './AddNewGoodsContent.css';
-import { Form, Input, Upload, Button, message } from 'antd';
+import React,{useState} from 'react';
+import { Form, Modal, Input, Button,message,Upload } from 'antd';
+import * as actionCreators from '../../store/actionCreator';
 import { UploadOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import * as actionCreators from '../../store/actionCreator';
 import { Link } from 'react-router-dom';
-// const { Option } = Select;
-
-class DishesAddContent extends React.Component {
-    state = {
-        fileListLength: 0
-    }
-    //图片上传前判断只能上传一张图片
-    beforeUploadMehtod = (file) => {
-        // console.log('beforeUpload');
-        // console.log(file);
-        // console.log(this.state.fileListLength);
-        if (this.state.fileListLength === 0) {
-            // console.log(this);
-            this.setState({
-                fileListLength: this.state.fileListLength + 1
-            })
-            // this.state.fileListLength = this.state.fileListLength+1
-            return true
-        } else {
-            message.error('只能上传一张图片')
-            return false
-        }
-    }
-    //上传组件参数
-    uploadProps = {
-        name: 'file',
-        accept: 'image/webp,image/apng,*/*;q=0.8',
-        method: 'post',
-        action: '/api/upload',
-        listType: 'picture',
-        // headers: {
-        //    'Content-Type':'multipart/form-data',
-        // },
-    };
-    //上传完图片执行回调
-    onChange(info) {
-        console.log(info);
-
-        if (info.file.status !== 'uploading') { }
-        if (info.file.status === 'done') {
-            // console.log(info.file, info.fileList);
-            console.log('从这开始打印success');
-            console.log(info.file)
-            //   this.props.getResponseOfPicURL(info.file.response.data);
-            message.success(`${info.file.name} 文件上传成功`);
-        } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} 文件上传失败`);
-        }
-    }
-    //表单样式
-    formItemLayout = {
+function EditPublishGoodsModal(props) {
+    const [fileListLength, setfileListLength] = useState(0)
+    const { getFieldDecorator } = props.form;
+    const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
             sm: { span: 5 },
@@ -71,11 +23,54 @@ class DishesAddContent extends React.Component {
             xl: { span: 16 }
         },
     };
-    //提交表单
-    handleSubmit = e => {
+
+     //图片上传前判断只能上传一张图片
+     const beforeUploadMehtod = (file) => {
+        if (fileListLength === 0) {
+            setfileListLength(fileListLength+1)
+            return true
+        } else {
+            message.error('只能上传一张图片')
+            return false
+        }
+    }
+    //上传组件参数
+    const uploadProps = {
+        name: 'file',
+        accept: 'image/webp,image/apng,*/*;q=0.8',
+        method: 'post',
+        action: '/api/upload',
+        listType: 'picture',
+        // headers: {
+        //    'Content-Type':'multipart/form-data',
+        // },
+    };
+    //上传完图片执行回调
+    const onChange = (info) => {
+        console.log(info);
+
+        if (info.file.status !== 'uploading') { }
+        if (info.file.status === 'done') {
+            // console.log(info.file, info.fileList);
+            console.log('从这开始打印success');
+            console.log(info.file)
+            //   this.props.getResponseOfPicURL(info.file.response.data);
+            message.success(`${info.file.name} 文件上传成功`);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} 文件上传失败`);
+        }
+    }
+    //以下方法为添加按钮modal事件
+
+    const editModalCancel = () => {
+        props.cancelPublishGoodsEditModal()
+    }
+
+     //提交表单
+     const handleSubmit = e => {
 
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.form.validateFields((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
 
@@ -84,31 +79,19 @@ class DishesAddContent extends React.Component {
         });
     };
 
-    // normFile = e => {
-    //     console.log('Upload event:', e);
-    //     if (Array.isArray(e)) {
-    //         return e;
-    //     }
-    //     return e && e.fileList;
-    // };
-    //下拉框选择
-    // handleChange=(value) =>{
-    // console.log(`selected ${value}`);
-    // }
-
-    render() {
-        const { getFieldDecorator } = this.props.form;
-
-        return (
-            <>
-                {/* <Row type="flex" > */}
-                <div className="dishes_add_main">
-                    {/* <Col xs={0} sm={0} md={4} lg={6} xl={6}></Col>
-                        <Col xs={24} sm={24} md={16} lg={10} xl={10}> */}
+    return (
+        <Modal
+            title="编辑商品信息"
+            visible={props.showOrCancelMyPublishGoodsEditModal}
+            onCancel={editModalCancel}
+            footer={null}
+            width={800}
+        >
+            <div className="dishes_add_main">
                     <div className="dishes_add_area">
-                        <div className="dishes_add_title">添加商品</div>
+                        {/* <div className="dishes_add_title">添加商品</div> */}
                         <div className="dishes_add_content">
-                            <Form {...this.formItemLayout} onSubmit={this.handleSubmit}>
+                            <Form {...formItemLayout} onSubmit={handleSubmit}>
 
                                 <Form.Item
                                     label="商品名称"
@@ -200,9 +183,9 @@ class DishesAddContent extends React.Component {
                                     {getFieldDecorator('dishPicture', {
                                         rules: [{ required: true, message: '请上传商品图片' }],
                                     })(
-                                        <Upload {...this.uploadProps}
-                                            onChange={(info) => this.onChange(info)}
-                                            beforeUpload={(file) => this.beforeUploadMehtod(file)}
+                                        <Upload {...uploadProps}
+                                            onChange={(info) => onChange(info)}
+                                            beforeUpload={(file) => beforeUploadMehtod(file)}
                                         >
                                             <Button>
                                                 <UploadOutlined /> 点击上传
@@ -234,31 +217,26 @@ class DishesAddContent extends React.Component {
                     {/* </Col> */}
                 </div>
                 {/* </Row> */}
-
-            </>
-        );
-    }
-    componentDidMount() {
-        this.props.getDishesCategories();
-    }
+        </Modal>
+    )
 }
-
-const DishesAddContentForm = Form.create({ name: 'normal_login' })(DishesAddContent);
-
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        dishesCategoriesList: state.get('dishesCategoriesList'),
+        showOrCancelMyPublishGoodsEditModal: state.get('showOrCancelMyPublishGoodsEditModal'),
+        meMessage: state.get('meMessage')
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getDishesCategories: () => {
-            dispatch(actionCreators.getAllCategories())
+        cancelPublishGoodsEditModal: () => {
+            dispatch(actionCreators.cancelPublishGoodsEditModal())
         },
-        toAddGoods: (addFormObj) => {
-            dispatch(actionCreators.addGoods(addFormObj))
+        editMeMessage: (MeObj) => {
+            dispatch(actionCreators.editMeMessage(MeObj))
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DishesAddContentForm);
+
+const EditPublishModal = Form.create({ name: 'add_form' })(EditPublishGoodsModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPublishModal);

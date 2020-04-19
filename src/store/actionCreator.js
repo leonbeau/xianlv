@@ -518,3 +518,55 @@ export const addGoods = (goodsObject) => {
     }
 }
 
+//删除我发布的商品
+
+
+export const deleteGoodsItem = (gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/deleteGoodsByGid?gid='+gid,
+        }).then((res) => {
+            if(res.data.code === 1){
+                message.success(res.data.message);
+                history.push('/#/publish');
+                setTimeout(() => history.go(), 1600);
+            }
+        //    console.log(res);
+        }).catch((error) => {
+            message.error('删除失败：', error);
+        })
+    }
+}
+//显示或关闭我发布商品的编辑modal框
+export const showPublishGoodsEditModal = () => ({
+    type: actionTypes.SHOW_PUBLISH_GOODS_EDIT_MODAL,
+})
+
+//隐藏
+export const cancelPublishGoodsEditModal = () => ({
+    type: actionTypes.CANCEL_PUBLISH_GOODS_EDIT_MODAL,
+})
+
+//编辑我发布的商品
+export const editGoodsItem = (gid) => {
+    // return (dispatch) => {
+    //     axios({
+    //         method: 'get',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         url: '/api/deleteGoodsByGid?gid='+gid,
+    //     }).then((res) => {
+    //         if(res.data.code === 1){
+    //             message.success(res.data.message)
+    //         }
+    //     //    console.log(res);
+    //     }).catch((error) => {
+    //         message.error('删除失败：', error);
+    //     })
+    // }
+}

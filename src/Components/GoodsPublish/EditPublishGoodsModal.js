@@ -1,6 +1,6 @@
 import React from 'react'
-import './AddNewGoodsContent.css';
-import { Form, Input, Upload, Button, message } from 'antd';
+// import './AddNewGoodsContent.css';
+import { Form, Input, Upload, Button, Modal, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';
@@ -13,15 +13,10 @@ class DishesAddContent extends React.Component {
     }
     //图片上传前判断只能上传一张图片
     beforeUploadMehtod = (file) => {
-        // console.log('beforeUpload');
-        // console.log(file);
-        // console.log(this.state.fileListLength);
         if (this.state.fileListLength === 0) {
-            // console.log(this);
             this.setState({
                 fileListLength: this.state.fileListLength + 1
             })
-            // this.state.fileListLength = this.state.fileListLength+1
             return true
         } else {
             message.error('只能上传一张图片')
@@ -35,9 +30,6 @@ class DishesAddContent extends React.Component {
         method: 'post',
         action: '/api/upload',
         listType: 'picture',
-        // headers: {
-        //    'Content-Type':'multipart/form-data',
-        // },
     };
     //上传完图片执行回调
     onChange(info) {
@@ -45,10 +37,6 @@ class DishesAddContent extends React.Component {
 
         if (info.file.status !== 'uploading') { }
         if (info.file.status === 'done') {
-            // console.log(info.file, info.fileList);
-            console.log('从这开始打印success');
-            console.log(info.file)
-            //   this.props.getResponseOfPicURL(info.file.response.data);
             message.success(`${info.file.name} 文件上传成功`);
         } else if (info.file.status === 'error') {
             message.error(`${info.file.name} 文件上传失败`);
@@ -71,6 +59,10 @@ class DishesAddContent extends React.Component {
             xl: { span: 16 }
         },
     };
+    editModalCancel = () => {
+        this.props.cancelPublishGoodsEditModal()
+    }
+
     //提交表单
     handleSubmit = e => {
 
@@ -79,34 +71,29 @@ class DishesAddContent extends React.Component {
             if (!err) {
                 // console.log('Received values of form: ', values);
 
-                this.props.toAddGoods(values);
+                this.props.toEditGoods(values);
             }
         });
     };
 
-    // normFile = e => {
-    //     console.log('Upload event:', e);
-    //     if (Array.isArray(e)) {
-    //         return e;
-    //     }
-    //     return e && e.fileList;
-    // };
-    //下拉框选择
-    // handleChange=(value) =>{
-    // console.log(`selected ${value}`);
-    // }
 
     render() {
         const { getFieldDecorator } = this.props.form;
 
         return (
             <>
-                {/* <Row type="flex" > */}
+                <Modal
+                    title="编辑商品信息"
+                    visible={this.props.showOrCancelMyPublishGoodsEditModal}
+                    onCancel={this.editModalCancel}
+                    footer={null}
+                    width={800}
+                >
+
+               
                 <div className="dishes_add_main">
-                    {/* <Col xs={0} sm={0} md={4} lg={6} xl={6}></Col>
-                        <Col xs={24} sm={24} md={16} lg={10} xl={10}> */}
                     <div className="dishes_add_area">
-                        <div className="dishes_add_title">添加商品</div>
+                        {/* <div className="dishes_add_title">添加商品</div> */}
                         <div className="dishes_add_content">
                             <Form {...this.formItemLayout} onSubmit={this.handleSubmit}>
 
@@ -156,26 +143,6 @@ class DishesAddContent extends React.Component {
 
                                 </Form.Item>
 
-                                {/* <Form.Item
-                                            label="商品类型"
-                                        >
-                                            {getFieldDecorator('goodsType', {
-                                                rules: [{ required: true, message: '请选择商品类型' }],
-                                            })(
-                                                <Select
-                                                 onChange={this.handleChange}>
-                                                {
-                                                    this.props.dishesCategoriesList.map((item,index)=>{
-                                                        return (
-                                                            <Option key={index} value={item.name}>{item.name}</Option>
-                                                        )
-                                                    })
-                                                }
-                                               
-                                            </Select>
-                                             )}
-
-                                        </Form.Item> */}
                                 <Form.Item
                                     label="商品描述"
                                 >
@@ -187,14 +154,10 @@ class DishesAddContent extends React.Component {
 
                                 </Form.Item>
 
-
-
-
                                 <Form.Item
                                     name="upload"
                                     label="商品图片"
                                     valuepropname="fileList"
-                                    // getvaluefromevent={this.normFile}
                                     extra="选择图片"
                                 >
                                     {getFieldDecorator('dishPicture', {
@@ -234,13 +197,12 @@ class DishesAddContent extends React.Component {
                     {/* </Col> */}
                 </div>
                 {/* </Row> */}
+                </Modal>
 
             </>
         );
     }
-    componentDidMount() {
-        this.props.getDishesCategories();
-    }
+   
 }
 
 const DishesAddContentForm = Form.create({ name: 'normal_login' })(DishesAddContent);
@@ -248,15 +210,17 @@ const DishesAddContentForm = Form.create({ name: 'normal_login' })(DishesAddCont
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        dishesCategoriesList: state.get('dishesCategoriesList'),
+        showOrCancelMyPublishGoodsEditModal:state.get('showOrCancelMyPublishGoodsEditModal'),
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getDishesCategories: () => {
-            dispatch(actionCreators.getAllCategories())
+        cancelPublishGoodsEditModal:()=>{
+            dispatch(actionCreators.cancelPublishGoodsEditModal())
         },
-        toAddGoods: (addFormObj) => {
+
+        //todo
+        toEditGoods: (addFormObj) => {
             dispatch(actionCreators.addGoods(addFormObj))
         }
     }

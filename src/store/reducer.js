@@ -14,7 +14,8 @@ const defaultState = fromJS({
     homeDishesList: [],
     meMessage: [],
     meMessageEditModalState: false,
-    myPublishGoodsList:[]
+    myPublishGoodsList:[],
+    showOrCancelMyPublishGoodsEditModal:false,
 
 });
 
@@ -71,6 +72,11 @@ export default (state = defaultState, action) => {
             return state.set('meMessageEditModalState', false)
         case actionTypes.MY_PUBLISH_GOODS:
             return state.set('myPublishGoodsList',action.data)
+        //显示或者关闭我发布的商品编辑Modal框
+        case actionTypes.SHOW_PUBLISH_GOODS_EDIT_MODAL:
+            return state.set('showOrCancelMyPublishGoodsEditModal',true)
+        case actionTypes.CANCEL_PUBLISH_GOODS_EDIT_MODAL:
+            return state.set('showOrCancelMyPublishGoodsEditModal',false)
         default:
             return state;
     }

@@ -26,3 +26,6 @@ export const SHOW_ME_MESSAGE_EDIT_MODAL = 'show_me_message_edit_modal'
 export const CANCAL_ME_MESSAGE_EDIT_MODAL = 'cancel_me_message_edit_modal' 
 //我发布的商品
 export const MY_PUBLISH_GOODS = 'my_publish_goods'
+//显示或关闭我发布的商品Modal
+export const SHOW_PUBLISH_GOODS_EDIT_MODAL = 'show_publish_goods_edit_modal'
+export const CANCEL_PUBLISH_GOODS_EDIT_MODAL = 'cancel_publish_goods_edit_modal'
