@@ -22,7 +22,7 @@ class SingleCard extends Component {
                             <span className="food_price">￥<span>{this.props.item.price}</span> </span>
 
                             <span className="food_order">
-                                <Link to="/u/foodDetail"><Button>详情</Button></Link>
+                                <Link to={`/foodDetail/${this.props.item.gid}`}><Button>详情</Button></Link>
                                 {
                                     this.props.isLogin === true || sessionStorage.getItem('isLogin') != null ?
                                     <Button type="primary">加入购物车</Button>

@@ -3,7 +3,9 @@ import './ShoppingCartMain.css';
 import {Button} from 'antd';
 import SingleFoodlist from './SingleFoodlist';
 
-export default class ShoppingCartMain extends Component {
+import {connect} from 'react-redux';
+import * as actionCreators from '../../store/actionCreator';
+class ShoppingCartMain extends Component {
     state = {
         shoppingGoodsList:[
             {
@@ -40,6 +42,9 @@ export default class ShoppingCartMain extends Component {
             },
         ]
     }
+    componentDidMount(){
+        this.props.getMyShoppingCart()
+    }
     render() {
         return (
             <>
@@ -62,7 +67,7 @@ export default class ShoppingCartMain extends Component {
                         {/* 菜品内容区域 */}
                         <div className="shoppingcart_content">
                         {
-                            this.state.shoppingGoodsList.map((item, index) => {
+                            this.props.shoppingCartGoods.map((item, index) => {
                                 return (
                                     // console.log(item,index)
                                     <SingleFoodlist key={index} item={item} />
@@ -94,3 +99,17 @@ export default class ShoppingCartMain extends Component {
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        shoppingCartGoods: state.get('shoppingCartGoods')
+    }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getMyShoppingCart: () => {
+            dispatch(actionCreators.getMyShoppingCart())
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ShoppingCartMain);

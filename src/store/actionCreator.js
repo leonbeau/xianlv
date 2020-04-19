@@ -622,3 +622,27 @@ export const changeHomeDishesList = (selectKey) => {
         })
     }
 }
+
+//获取购物车的物品 保存到reducer
+export const shoppingCartGoods = (dishesData) => ({
+    type: actionTypes.SHOPPING_CART_GOODS,
+    data: dishesData
+})
+export const getMyShoppingCart = (selectKey) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getshop' ,
+        }).then((res) => {
+            console.log(res);
+            dispatch(shoppingCartGoods(res.data));
+
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}
+

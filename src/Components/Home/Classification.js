@@ -13,7 +13,7 @@ class Classification extends Component {
     handleClick = e => {
         const selectKey = e.item.props.children
         // console.log(selectKey)
-        if(selectKey === '今日推荐'){
+        if(selectKey === '全部商品'){
             this.props.getFirstPageGoods()
         }else{
             this.props.changeHomeDishesList(selectKey)
@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getAllCategories: () => {
             dispatch(actionCreators.getAllCategories())
         },
-        getFirstPageGoods:()=>{
+        getFirstPageGoods:() => {
             dispatch(actionCreators.getFirstPageGoods())
         },
         changeHomeDishesList:(selectKey) => {

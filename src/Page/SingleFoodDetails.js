@@ -10,7 +10,7 @@ export default class SingleFoodDetails extends Component {
                 <Row type="flex" justify="center" >
                     {/* banner栏 */}
                     <Col xs={24} sm={24} md={16} lg={19} xl={16}>
-                        <CommonBanner commonbannerTitle="菜品详情" />
+                        <CommonBanner commonbannerTitle="商品详情" />
                         {/* 菜品信息 和评价信息*/}
                         <SingleFoodMessage />
                      

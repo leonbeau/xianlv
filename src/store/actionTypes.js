@@ -33,3 +33,5 @@ export const CANCEL_PUBLISH_GOODS_EDIT_MODAL = 'cancel_publish_goods_edit_modal'
 export const SAVE_USER_CHOOSE_EDIT_GOODS_GID = 'save_user_choose_edit_goods_gid'
 //保存总页数
 export const TOTAL_PAGE = 'total_page'
+//获取购物车商品
+export const SHOPPING_CART_GOODS = 'shopping_cart_goods'
