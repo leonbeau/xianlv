@@ -10,6 +10,7 @@ class MyPublishOrder extends Component {
         this.props.deleteGoodsItem(gid)
     }
     editGoodsItem(gid){
+        this.props.saveUserChooseEditGoodsGid(gid)
         this.props.showPublishGoodsEditModal()
         console.log('editGoodsItem',gid);
         // this.props.editGoodsItem(gid)
@@ -104,7 +105,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         editGoodsItem:(gid) => {
             dispatch(actionCreators.editGoodsItem(gid))
-        }
+        },
+        saveUserChooseEditGoodsGid:(gid)=>{
+            dispatch(actionCreators.saveUserChooseEditGoodsGid(gid))
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyPublishOrder);

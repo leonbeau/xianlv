@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Icon ,Menu, message} from 'antd';
+import { Row, Col, Icon ,Menu, message,Affix} from 'antd';
 import './Header.css';
 import logo from '../../static/logo.png';
 import {connect} from 'react-redux';
@@ -31,6 +31,8 @@ class Header extends Component {
     render() {
         return (
             <>
+            <Affix>
+  
                 <div className="Header_header">
                     {/* 采用antd栅格布局 */}
                     <Row type="flex" justify="center" >
@@ -123,7 +125,8 @@ class Header extends Component {
                         </Col>
                     </Row>
                 </div>
-
+              
+                </Affix>
             </>
         )
     }

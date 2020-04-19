@@ -541,6 +541,12 @@ export const deleteGoodsItem = (gid) => {
         })
     }
 }
+//当用户点击我的发布的商品编辑时，保存商品gid
+export const saveUserChooseEditGoodsGid = (gid) => ({
+    type: actionTypes.SAVE_USER_CHOOSE_EDIT_GOODS_GID,
+    data: gid
+})
+
 //显示或关闭我发布商品的编辑modal框
 export const showPublishGoodsEditModal = () => ({
     type: actionTypes.SHOW_PUBLISH_GOODS_EDIT_MODAL,
