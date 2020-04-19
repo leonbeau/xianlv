@@ -11,9 +11,10 @@ class Classification extends Component {
       };
     
     handleClick = e => {
-        const selectKey = e.item.props.eventKey
-        if(selectKey === 'all'){
-            this.props.getAllDishes()
+        const selectKey = e.item.props.children
+        // console.log(selectKey)
+        if(selectKey === '今日推荐'){
+            this.props.getFirstPageGoods()
         }else{
             this.props.changeHomeDishesList(selectKey)
         }
@@ -39,10 +40,10 @@ class Classification extends Component {
                         >
                               
                                 <Menu.ItemGroup key="g1" title="">
-                                    <Menu.Item key="all">全部菜品</Menu.Item>
+                                    <Menu.Item key="all">今日推荐</Menu.Item>
                                     {
                                         data.map((item,index)=>{
-                                        return <Menu.Item key={item.id}>{item.name}</Menu.Item>
+                                        return <Menu.Item key={index}>{item}</Menu.Item>
                                         })
                                     }
                                     
@@ -58,7 +59,7 @@ class Classification extends Component {
 
     componentDidMount(){
         this.props.getAllCategories();
-        this.props.getAllDishes();
+      
     }
 }
 
@@ -73,8 +74,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getAllCategories: () => {
             dispatch(actionCreators.getAllCategories())
         },
-        getAllDishes:() => {
-            dispatch(actionCreators.getAllDishes())
+        getFirstPageGoods:()=>{
+            dispatch(actionCreators.getFirstPageGoods())
         },
         changeHomeDishesList:(selectKey) => {
             dispatch(actionCreators.changeHomeDishesList(selectKey))

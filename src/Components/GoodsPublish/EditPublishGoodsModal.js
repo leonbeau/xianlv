@@ -216,8 +216,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         cancelPublishGoodsEditModal:()=>{
             dispatch(actionCreators.cancelPublishGoodsEditModal())
         },
-
-        //todo
         toEditGoods: (addFormObj,gid) => {
             dispatch(actionCreators.editPublishGoods(addFormObj,gid))
         }

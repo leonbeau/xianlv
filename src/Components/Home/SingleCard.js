@@ -13,7 +13,7 @@ class SingleCard extends Component {
 
                     {/* 图片区域 */}
                     <div className="singlecard_pic">
-                        <img alt="" src={this.props.item.pic} />
+                        <img src={"http://120.79.56.242:8080/"+this.props.item.path}/>
                     </div>
                     {/* 价格，数量区域 */}
                     <div className="singlecard_content">
@@ -24,10 +24,10 @@ class SingleCard extends Component {
                             <span className="food_order">
                                 <Link to="/u/foodDetail"><Button>详情</Button></Link>
                                 {
-                                    this.props.isLogin === true || sessionStorage.getItem('isLogin')=== 'true' ?
+                                    this.props.isLogin === true || sessionStorage.getItem('isLogin') != null ?
                                     <Button type="primary">加入购物车</Button>
                                     :
-                                    <Button type="primary">立即订餐</Button>
+                                    <Button type="primary">立即订购</Button>
                                 }
                                 
                             </span>

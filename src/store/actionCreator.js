@@ -189,9 +189,9 @@ export const getAllCategories = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoods?page=1',
+            url: '/api/getGoodsType',
         }).then((res) => {
-            // console.log(res.data);
+            console.log(res);
             dispatch(getAllCategoriesList(res.data));
         }).catch((error) => {
             message.error('获取失败：', error);
@@ -317,7 +317,7 @@ export const deleteDishById = (dishId) => {
 //获取全部菜品
 
 
-export const getAllDishes = () => {
+export const getFirstPageGoods = () => {
     return (dispatch) => {
         axios({
             method: 'get',
@@ -334,34 +334,7 @@ export const getAllDishes = () => {
 }
 
 
-//根据用户选择的id去更改渲染home菜品列表
-//将拿到的菜品列表放到仓库中
-export const getSelectKeyDishesList = (dishesData) => ({
-    type: actionTypes.HOME_DISHES_LIST,
-    data: dishesData
-})
 
-export const changeHomeDishesList = (selectKey) => {
-    return (dispatch) => {
-        axios({
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            url: '/api/m/meal/kind/' + selectKey,
-        }).then((res) => {
-            if (res.data.success) {
-                // console.log(res.data)
-                dispatch(getSelectKeyDishesList(res.data.data));
-            } else {
-                message.warning(res.data.message);
-            }
-
-        }).catch((error) => {
-            message.error('获取失败：', error);
-        })
-    }
-}
 
 
 
@@ -617,3 +590,27 @@ export const editPublishGoods = (goodsObject,gid) => {
     }
 }
 
+//根据用户选择的id去更改渲染home商品列表
+//将拿到的菜品列表放到仓库中
+export const getSelectKeyDishesList = (dishesData) => ({
+    type: actionTypes.HOME_DISHES_LIST,
+    data: dishesData
+})
+
+export const changeHomeDishesList = (selectKey) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getGoodsByType?type='+selectKey+'&page=1' ,
+        }).then((res) => {
+            console.log(res);
+            dispatch(getSelectKeyDishesList(res.data));
+
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}
