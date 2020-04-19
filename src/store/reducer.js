@@ -18,7 +18,8 @@ const defaultState = fromJS({
     showOrCancelMyPublishGoodsEditModal:false,
     publiseUserChooseGoodsGid:null,
     totalPage:1,
-    shoppingCartGoods:[]
+    shoppingCartGoods:[],
+    goodsDetails:{}
 });
 
 export default (state = defaultState, action) => {
@@ -85,7 +86,9 @@ export default (state = defaultState, action) => {
         case actionTypes.TOTAL_PAGE:
             return state.set('totalPage',action.data);
         case actionTypes.SHOPPING_CART_GOODS:
-            return state.set('shoppingCartGoods',action.data)
+            return state.set('shoppingCartGoods',action.data);
+        case actionTypes.GOODS_DETAILS:
+            return state.set('goodsDetails',action.data)
         default:
             return state;
     }

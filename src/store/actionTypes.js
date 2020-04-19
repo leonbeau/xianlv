@@ -35,3 +35,5 @@ export const SAVE_USER_CHOOSE_EDIT_GOODS_GID = 'save_user_choose_edit_goods_gid'
 export const TOTAL_PAGE = 'total_page'
 //获取购物车商品
 export const SHOPPING_CART_GOODS = 'shopping_cart_goods'
+//获取商品详情
+export const GOODS_DETAILS = 'goods_details'

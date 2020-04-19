@@ -28,11 +28,11 @@ class SingleCardMain extends Component {
                 </div>
 
                 {/* 分页 */}
-                <div className="pagination">
+                {/* <div className="pagination">
                 <div className="layout">
                     <Pagination defaultCurrent={1} pageSize={9} total={this.props.totalPage} />
                 </div>
-                </div>
+                </div> */}
             </>
         )
     }

@@ -646,3 +646,51 @@ export const getMyShoppingCart = (selectKey) => {
     }
 }
 
+//获取商品细节
+// showGoodsDetail
+
+export const showGoodsDetailSave = (goodsData) => ({
+    type: actionTypes.GOODS_DETAILS,
+    data: goodsData
+})
+export const showGoodsDetail = (gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getGoodsById?gid='+gid ,
+        }).then((res) => {
+            console.log(res);
+            dispatch(showGoodsDetailSave(res.data));
+
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}
+
+//加入商品到购物车
+export const addGoodsToShoppingCart = (gid) => {
+    let data = {
+        gid: parseInt(gid),
+        sum: parseInt(1)
+    }
+    return (dispatch) => {
+        axios({
+            method: 'post',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            url: '/api/addShopping' ,
+            data:data,
+        }).then((res) => {
+            console.log(res);
+            
+
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}

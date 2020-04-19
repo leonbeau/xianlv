@@ -3,8 +3,12 @@ import './SingleCard.css';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import * as actionCreators from '../../store/actionCreator';
 class SingleCard extends Component {
+    addToShoppingCart(gid){
+        console.log('addToShoppingCart gid'+gid);
+        this.props.addGoodsToShoppingCart(gid)
+    }
     render() {
         return (
             <>
@@ -25,7 +29,7 @@ class SingleCard extends Component {
                                 <Link to={`/foodDetail/${this.props.item.gid}`}><Button>详情</Button></Link>
                                 {
                                     this.props.isLogin === true || sessionStorage.getItem('isLogin') != null ?
-                                    <Button type="primary">加入购物车</Button>
+                                    <Button type="primary" onClick={()=>this.addToShoppingCart(this.props.item.gid)}>加入购物车</Button>
                                     :
                                     <Button type="primary">立即订购</Button>
                                 }
@@ -46,5 +50,13 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        addGoodsToShoppingCart: (gid) => {
+            dispatch(actionCreators.addGoodsToShoppingCart(gid))
+        }
+    }
+}
 
-export default connect(mapStateToProps,null)(SingleCard) ;
+
+export default connect(mapStateToProps,mapDispatchToProps)(SingleCard) ;

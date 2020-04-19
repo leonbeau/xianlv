@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import './SingleFoodMessage.css';
 import './SingleFoodMessage.m.css';
-import { Rate, Button,Pagination,Input } from 'antd';
-import { Link } from 'react-router-dom';
-
+import { Button, Input } from 'antd';
 const { TextArea } = Input;
 
 export default class SingleFoodMessage extends Component {
-  
+
     render() {
         return (
             <>
@@ -15,22 +13,23 @@ export default class SingleFoodMessage extends Component {
                     {/* 菜品信息区域 */}
                     <div className="food_message_area">
                         <span className="food_pic">
-                            <img src="https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png" alt="/" />
+                            <img src={"http://120.79.56.242:8080/" + this.props.goods.path} />
                         </span>
                         <span className="food_message">
-                            <div className="food_name">椒麻鸡丝饭单人套餐1</div>
-                            <div className="user_star">评分　<Rate defaultValue={4} /></div>
-                            <div className="food_details">该套餐包含：椒麻鸡丝饭 + 可乐(中杯) + 鲜蔬 色香味俱全。嘿嘿</div>
+                            <div className="food_name">{this.props.goods.name}</div>
+                            <div className="user_star">类型：{this.props.goods.type}</div>
+                            <div className="user_star">剩余：{this.props.goods.sum}</div>
+                            <div className="food_details">{this.props.goods.beizhu}</div>
                             <div className="unit_price_and_btn">
 
-                                <span className="unit_price">￥37</span>
+                                <span className="unit_price">{this.props.goods.price}元</span>
                                 <span className="unit_btn"><Button type="primary" size="large">加入购物车</Button></span>
 
                             </div>
                         </span>
 
                     </div>
-                   
+
 
                 </div>
             </>
