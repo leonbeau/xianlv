@@ -576,3 +576,44 @@ export const editGoodsItem = (gid) => {
     //     })
     // }
 }
+
+//增加我发布的商品
+export const editPublishGoods = (goodsObject,gid) => {
+    console.log(goodsObject);
+    
+    return (dispatch) => {
+        let data = {
+            gid: gid,
+            name: goodsObject.goodsName,
+            type: goodsObject.goodsType,
+            price: parseFloat(goodsObject.goodsUnitPrice) ,
+            sum: parseInt(goodsObject.goodsSum),
+            beizhu: goodsObject.goodsDescribe,
+            path:goodsObject.dishPicture.file.response,
+        }
+
+
+        axios({
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/updateGoods',
+            data: data
+        }).then((res) => {
+            console.log(res);
+            
+            if (res.data === "success") {
+                message.success('编辑我的发布商品'+gid+'成功');
+                history.push('/#/publish');
+                setTimeout(() => history.go(), 1600);
+            } else {
+                message.warning(res.data.message);
+            }
+
+        }).catch((error) => {
+            message.error('编辑商品失败：', error);
+        })
+    }
+}
+

@@ -6,7 +6,7 @@ import * as actionCreators from '../../store/actionCreator';
 
 class Classification extends Component {
     state = {
-        top: 50,
+        top: 100,
         bottom: 10,
       };
     

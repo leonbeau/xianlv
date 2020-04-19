@@ -70,8 +70,8 @@ class DishesAddContent extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
-
-                this.props.toEditGoods(values);
+                const gid = this.props.publiseUserChooseGoodsGid;
+                this.props.toEditGoods(values,gid);
             }
         });
     };
@@ -180,9 +180,6 @@ class DishesAddContent extends React.Component {
                                 >
 
                                     <div className="submit_button">
-                                        <Link to="/publish">
-                                            <Button size="large" style={{ marginRight: "1rem" }}>返回</Button>
-                                        </Link>
                                         <Button size="large" type="primary" htmlType="submit">
                                             提交
                                             </Button>
@@ -211,6 +208,7 @@ const DishesAddContentForm = Form.create({ name: 'normal_login' })(DishesAddCont
 const mapStateToProps = (state, ownProps) => {
     return {
         showOrCancelMyPublishGoodsEditModal:state.get('showOrCancelMyPublishGoodsEditModal'),
+        publiseUserChooseGoodsGid:state.get('publiseUserChooseGoodsGid')
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -220,8 +218,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
 
         //todo
-        toEditGoods: (addFormObj) => {
-            dispatch(actionCreators.addGoods(addFormObj))
+        toEditGoods: (addFormObj,gid) => {
+            dispatch(actionCreators.editPublishGoods(addFormObj,gid))
         }
     }
 }

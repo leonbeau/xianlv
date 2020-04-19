@@ -40,7 +40,7 @@ class MyPublishOrder extends Component {
                                     <>
                                         {/* 一个订单 */}
                     
-                                        <div className="single_order" key={index}>
+                                        <div className="single_order" key={item.gid}>
                                             {/* 图片 */}
                                             <span className="order_food_picture">
                                                 <img src={"http://120.79.56.242:8080/"+item.path}/>
