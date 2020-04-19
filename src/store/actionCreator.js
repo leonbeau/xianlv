@@ -314,24 +314,6 @@ export const deleteDishById = (dishId) => {
 
 // 前台用户部分
 
-//获取全部菜品
-
-
-export const getFirstPageGoods = () => {
-    return (dispatch) => {
-        axios({
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            url: '/api/getGoods?page=1',
-        }).then((res) => {
-                dispatch(getSelectKeyDishesList(res.data));
-        }).catch((error) => {
-            message.error('获取失败：', error);
-        })
-    }
-}
 
 
 
@@ -589,6 +571,32 @@ export const editPublishGoods = (goodsObject,gid) => {
         })
     }
 }
+
+
+//获取全部商品
+//保存总页数，分页用
+export const saveTotalMount = (totalPage) => ({
+    type: actionTypes.TOTAL_PAGE,
+    data: totalPage
+})
+export const getFirstPageGoods = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getGoods?page=1',
+        }).then((res) => {
+            const goodsLength = res.data.length ;
+            dispatch(saveTotalMount(goodsLength))
+            dispatch(getSelectKeyDishesList(res.data));
+        }).catch((error) => {
+            message.error('获取失败：', error);
+        })
+    }
+}
+
 
 //根据用户选择的id去更改渲染home商品列表
 //将拿到的菜品列表放到仓库中

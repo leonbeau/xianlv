@@ -30,7 +30,7 @@ class SingleCardMain extends Component {
                 {/* 分页 */}
                 <div className="pagination">
                 <div className="layout">
-                    <Pagination defaultCurrent={1} total={50} />
+                    <Pagination defaultCurrent={1} pageSize={9} total={this.props.totalPage} />
                 </div>
                 </div>
             </>
@@ -48,7 +48,8 @@ class SingleCardMain extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        homeDishesList: state.get('homeDishesList')
+        homeDishesList: state.get('homeDishesList'),
+        totalPage:state.get('totalPage')
     }
 }
 

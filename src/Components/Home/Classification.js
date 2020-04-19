@@ -40,7 +40,7 @@ class Classification extends Component {
                         >
                               
                                 <Menu.ItemGroup key="g1" title="">
-                                    <Menu.Item key="all">今日推荐</Menu.Item>
+                                    <Menu.Item key="all">全部商品</Menu.Item>
                                     {
                                         data.map((item,index)=>{
                                         return <Menu.Item key={index}>{item}</Menu.Item>

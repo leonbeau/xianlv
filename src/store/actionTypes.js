@@ -31,3 +31,5 @@ export const SHOW_PUBLISH_GOODS_EDIT_MODAL = 'show_publish_goods_edit_modal'
 export const CANCEL_PUBLISH_GOODS_EDIT_MODAL = 'cancel_publish_goods_edit_modal'
 //当用户点击我的发布的商品编辑时，保存商品gid
 export const SAVE_USER_CHOOSE_EDIT_GOODS_GID = 'save_user_choose_edit_goods_gid'
+//保存总页数
+export const TOTAL_PAGE = 'total_page'

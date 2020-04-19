@@ -17,7 +17,7 @@ const defaultState = fromJS({
     myPublishGoodsList:[],
     showOrCancelMyPublishGoodsEditModal:false,
     publiseUserChooseGoodsGid:null,
-
+    totalPage:1
 });
 
 export default (state = defaultState, action) => {
@@ -80,7 +80,9 @@ export default (state = defaultState, action) => {
             return state.set('showOrCancelMyPublishGoodsEditModal',false);
         //当用户点击我的发布的商品编辑时，保存商品gid
         case actionTypes.SAVE_USER_CHOOSE_EDIT_GOODS_GID:
-            return state.set('publiseUserChooseGoodsGid',action.data)
+            return state.set('publiseUserChooseGoodsGid',action.data);
+        case actionTypes.TOTAL_PAGE:
+            return state.set('totalPage',action.data)
         default:
             return state;
     }
