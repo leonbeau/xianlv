@@ -9,6 +9,7 @@
     }
     /* 当商品为空时的样式 */
     .myorder_area .myorder_empty{
+        
         align-items: center;
         margin:0 auto;
     }

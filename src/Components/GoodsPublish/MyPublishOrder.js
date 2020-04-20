@@ -4,6 +4,7 @@ import {Button} from 'antd';
 import {Link} from 'react-router-dom';
 import EditPublishGoodsModal from './EditPublishGoodsModal';
 import * as actionCreators from '../../store/actionCreator';
+import './MyPublishOrder.css';
 class MyPublishOrder extends Component {
     deleteGoodsItem(gid){
         console.log('deleteGoodItem',gid);

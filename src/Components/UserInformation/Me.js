@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import './Me.css';
-import './Me.m.css';
 import { Button } from 'antd';
-import MyOrders from './MyOrders';
 import EditModal from './EditMeModal';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';
@@ -38,7 +36,7 @@ class Me extends Component {
                     </div>
                     <EditModal />
                     {/* 我的订单区域 */}
-                        <MyOrders />
+                        {/* <MyOrders /> */}
                     {/* 我的订单结束 */}
                 </div>
             </>

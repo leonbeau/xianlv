@@ -57,7 +57,7 @@ class ShoppingCartMain extends Component {
                             <span className="choose">
                                 选择
                             </span>
-                            <span className="food">菜品</span>
+                            <span className="food">商品</span>
                             <span className="unitprice">单价</span>
                             <span className="mount">数量</span>
                             <span className="money">金额</span>
@@ -68,8 +68,11 @@ class ShoppingCartMain extends Component {
                         <div className="shoppingcart_content">
                         {
                             this.props.shoppingCartGoods.map((item, index) => {
+                                // console.log(item);
+                                
                                 return (
                                     // console.log(item,index)
+                                    
                                     <SingleFoodlist key={index} item={item} />
                                     // <GoodList item={item} key={index} refresh={this.refresh.bind(this)}/>
                                 )

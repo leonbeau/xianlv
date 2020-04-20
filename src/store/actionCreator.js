@@ -686,11 +686,30 @@ export const addGoodsToShoppingCart = (gid) => {
             url: '/api/addShopping' ,
             data:JSON.stringify(data) ,
         }).then((res) => {
-            console.log(res);
-            
+            message.success('添加到购物车成功')
 
         }).catch((error) => {
             message.error('获取失败：', error);
+        })
+    }
+}
+
+//把商品从购物车删除
+export const deleteShoppingCart = (gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+            },
+            url: 'api/deleteShopById?gid='+gid,
+        }).then((res) => {
+            message.success('删除购物车商品成功');
+            history.push('/#/shoppingcart');
+            setTimeout(() => history.go(), 1000);
+
+        }).catch((error) => {
+            message.error('删除购物车商品失败', error);
         })
     }
 }
