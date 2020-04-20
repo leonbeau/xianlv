@@ -681,10 +681,10 @@ export const addGoodsToShoppingCart = (gid) => {
         axios({
             method: 'post',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json;charset=UTF-8',
             },
             url: '/api/addShopping' ,
-            data:data,
+            data:JSON.stringify(data) ,
         }).then((res) => {
             console.log(res);
             
