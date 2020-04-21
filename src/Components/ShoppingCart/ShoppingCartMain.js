@@ -6,44 +6,10 @@ import SingleFoodlist from './SingleFoodlist';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';
 class ShoppingCartMain extends Component {
-    state = {
-        shoppingGoodsList:[
-            {
-                foodId:'001',
-                foodName:'椒麻鸡丝饭单人套餐1',
-                foodPicUrl:'https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png',
-                unitPrice:37,
-                foodMount:2,
-                unitTotalPrice:74
-            },
-            {
-                foodId:'002',
-                foodName:'椒麻鸡丝饭单人套餐2',
-                foodPicUrl:'https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png',
-                unitPrice:20,
-                foodMount:2,
-                unitTotalPrice:74
-            },
-            {
-                foodId:'003',
-                foodName:'椒麻鸡丝饭单人套餐3',
-                foodPicUrl:'https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png',
-                unitPrice:47,
-                foodMount:2,
-                unitTotalPrice:74
-            },
-            {
-                foodId:'004',
-                foodName:'椒麻鸡丝饭单人套餐4',
-                foodPicUrl:'https://i.loli.net/2020/02/16/mtuUPOpM6bFofQ5.png',
-                unitPrice:15,
-                foodMount:2,
-                unitTotalPrice:74
-            },
-        ]
-    }
+   
+    
     componentDidMount(){
-        this.props.getMyShoppingCart()
+        this.props.getMyShoppingCart();
     }
     render() {
         return (
@@ -55,7 +21,7 @@ class ShoppingCartMain extends Component {
                         {/* 购物车头部 */}
                         <div className="shoppingcart_header">
                             <span className="choose">
-                                选择
+                                
                             </span>
                             <span className="food">商品</span>
                             <span className="unitprice">单价</span>
@@ -89,7 +55,7 @@ class ShoppingCartMain extends Component {
                                 <span className="footer_money">
                                     总计金额:
                                     <span className="money_value">
-                                       ￥345
+                                       ￥{this.props.shoppingCartTotalPrice}
                                     </span>
                                 </span>
                             </div>
@@ -105,7 +71,8 @@ class ShoppingCartMain extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        shoppingCartGoods: state.get('shoppingCartGoods')
+        shoppingCartGoods: state.get('shoppingCartGoods'),
+        shoppingCartTotalPrice:state.get('shoppingCartTotalPrice')
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {

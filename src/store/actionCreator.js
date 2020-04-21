@@ -628,6 +628,10 @@ export const shoppingCartGoods = (dishesData) => ({
     type: actionTypes.SHOPPING_CART_GOODS,
     data: dishesData
 })
+export const shoppingCartTotalPrice = (price) => ({
+    type: actionTypes.SHOPPING_CART_TOTAL_PRICE,
+    data: price
+})
 export const getMyShoppingCart = (selectKey) => {
     return (dispatch) => {
         axios({
@@ -637,7 +641,15 @@ export const getMyShoppingCart = (selectKey) => {
             },
             url: '/api/getshop' ,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
+            //计算总费用
+            let sum = 0;
+            res.data.map((item,index)=>{
+                const singleMoney = parseFloat(item.price) * parseInt(item.shoppingsum);
+                sum = singleMoney + sum
+                return sum
+            })
+            dispatch(shoppingCartTotalPrice(sum))
             dispatch(shoppingCartGoods(res.data));
 
         }).catch((error) => {
@@ -710,6 +722,33 @@ export const deleteShoppingCart = (gid) => {
 
         }).catch((error) => {
             message.error('删除购物车商品失败', error);
+        })
+    }
+}
+
+//更新购物车商品的数量
+
+export const changeShoppingCartGoodsMount = (mount,gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/updateShoppingSum?gid='+gid+'&sum='+mount,
+        }).then((res) => {
+            console.log(res);
+            if(res.data === 'success'){
+                message.success('更新购物车商品成功');
+                history.push('/#/shoppingcart');
+                setTimeout(() => history.go(), 800);
+            }
+            // message.success('删除购物车商品成功');
+            // history.push('/#/shoppingcart');
+            // setTimeout(() => history.go(), 1000);
+
+        }).catch((error) => {
+            message.error('更新商品数量失败', error);
         })
     }
 }

@@ -19,7 +19,8 @@ const defaultState = fromJS({
     publiseUserChooseGoodsGid:null,
     totalPage:1,
     shoppingCartGoods:[],
-    goodsDetails:{}
+    goodsDetails:{},
+    shoppingCartTotalPrice:0,
 });
 
 export default (state = defaultState, action) => {
@@ -88,7 +89,9 @@ export default (state = defaultState, action) => {
         case actionTypes.SHOPPING_CART_GOODS:
             return state.set('shoppingCartGoods',action.data);
         case actionTypes.GOODS_DETAILS:
-            return state.set('goodsDetails',action.data)
+            return state.set('goodsDetails',action.data);
+        case actionTypes.SHOPPING_CART_TOTAL_PRICE:
+            return state.set('shoppingCartTotalPrice',action.data);
         default:
             return state;
     }

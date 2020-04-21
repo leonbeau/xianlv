@@ -12,15 +12,11 @@ class SingleFoodlist extends Component {
         console.log(`checked = ${e.target.checked}`);
     }
     // 改变数量按钮
-    changeMount = (mountValue)=>{
-        const unitPrice = this.props.item.price;
-        const totlePrice = unitPrice * mountValue;
-        console.log(totlePrice);
+    changeMount = (mountValue,gid)=>{
+       
+        console.log(mountValue,gid);
+        this.props.changeShoppingCartGoodsMount(mountValue,gid)
         
-        // this.setState({
-        //     unitTotleValue:totlePrice
-        // })
-        // console.log('changed', mountValue);
     }
     deleteShoppingCart(gid){
         console.log('deleteShoppingCart',gid);
@@ -34,7 +30,7 @@ class SingleFoodlist extends Component {
 
                     <div className="single_foods">
                         <span className="choose">
-                            <Checkbox onChange={this.onChange}></Checkbox>
+                            {/* <Checkbox onChange={this.onChange}></Checkbox> */}
                         </span>
                         <span className="food">
 
@@ -45,13 +41,13 @@ class SingleFoodlist extends Component {
                         <span className="mount">
                             <InputNumber
                                 min={1}
-                                max={this.props.item.sum}
-                                defaultValue={1}
-                                onChange={this.changeMount}
+                                max={this.props.item.goodssum}
+                                defaultValue={this.props.item.shoppingsum}
+                                onChange={(value)=>this.changeMount(value,this.props.item.gid)}
                             />
                         </span>
                         <span className="money">
-                            <span className="howmuch">￥{this.props.item.price}</span>
+                            <span className="howmuch">￥{this.props.item.price*this.props.item.shoppingsum}</span>
                         </span>
                         <span onClick={()=>this.deleteShoppingCart(this.props.item.gid)} className="option" >
                             <Icon  type="close" />
@@ -74,6 +70,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         deleteShoppingCart: (gid) => {
             dispatch(actionCreators.deleteShoppingCart(gid))
+        },
+        changeShoppingCartGoodsMount:(mount,gid)=>{
+            dispatch(actionCreators.changeShoppingCartGoodsMount(mount,gid))
         }
     }
 }

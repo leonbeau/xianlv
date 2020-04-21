@@ -37,3 +37,5 @@ export const TOTAL_PAGE = 'total_page'
 export const SHOPPING_CART_GOODS = 'shopping_cart_goods'
 //获取商品详情
 export const GOODS_DETAILS = 'goods_details'
+//购物车总费用
+export const SHOPPING_CART_TOTAL_PRICE = 'shopping_cart_total_price'
