@@ -39,3 +39,5 @@ export const SHOPPING_CART_GOODS = 'shopping_cart_goods'
 export const GOODS_DETAILS = 'goods_details'
 //购物车总费用
 export const SHOPPING_CART_TOTAL_PRICE = 'shopping_cart_total_price'
+//wangyu管理员专属的订单管理页面
+export const ADMIN_ORDER_LIST = 'admin_order_list'

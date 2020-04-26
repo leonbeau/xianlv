@@ -674,7 +674,7 @@ export const showGoodsDetail = (gid) => {
             },
             url: '/api/getGoodsById?gid='+gid ,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(showGoodsDetailSave(res.data));
 
         }).catch((error) => {
@@ -749,6 +749,102 @@ export const changeShoppingCartGoodsMount = (mount,gid) => {
 
         }).catch((error) => {
             message.error('更新商品数量失败', error);
+        })
+    }
+}
+
+/**
+ * 把购物车商品加入购物车
+ */
+
+export const addOrder = (totalMoney) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: 'api/addDingDan?money='+totalMoney,
+        }).then((res) => {
+            // console.log(res);
+            if(res.data === 'success'){
+                message.success('下单成功');
+            }
+
+        }).catch((error) => {
+            message.error('下单失败', error);
+        })
+    }
+}
+
+/**
+ * 管理员wangyu确认订单页面
+ *
+ */
+
+export const orderListSave = (orderlist) => ({
+    type: actionTypes.ADMIN_ORDER_LIST,
+    data: orderlist
+})
+
+export const showAllOrderList = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getDingdan',
+        }).then((res) => {
+            console.log(res);
+            dispatch(orderListSave(res.data));
+
+        }).catch((error) => {
+            message.error('下单失败', error);
+        })
+    }
+}
+
+export const orderAgree = (id) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/agree?username=wangyu&did='+id,
+        }).then((res) => {
+            console.log(res);
+            if(res.data === 'success'){
+                message.success('已同意订单');
+                history.push('/#/order');
+                setTimeout(() => history.go(), 800);
+            }
+
+        }).catch((error) => {
+            message.error('同意订单失败', error);
+        })
+    }
+}
+
+export const orderDisagree = (id) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/noagree?did='+id,
+        }).then((res) => {
+            console.log(res);
+            if(res.data === 'success'){
+                message.success('已不同意订单');
+                history.push('/#/order');
+                setTimeout(() => history.go(), 800);
+            }
+
+        }).catch((error) => {
+            message.error('不同意订单失败', error);
         })
     }
 }

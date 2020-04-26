@@ -21,6 +21,7 @@ const defaultState = fromJS({
     shoppingCartGoods:[],
     goodsDetails:{},
     shoppingCartTotalPrice:0,
+    adminOrderList:[]
 });
 
 export default (state = defaultState, action) => {
@@ -92,6 +93,8 @@ export default (state = defaultState, action) => {
             return state.set('goodsDetails',action.data);
         case actionTypes.SHOPPING_CART_TOTAL_PRICE:
             return state.set('shoppingCartTotalPrice',action.data);
+        case actionTypes.ADMIN_ORDER_LIST:
+            return state.set('adminOrderList',action.data);
         default:
             return state;
     }

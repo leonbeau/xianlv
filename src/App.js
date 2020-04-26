@@ -8,6 +8,7 @@ import SingleFoodDetails from './Page/SingleFoodDetails';
 import UserInformation from './Page/UserInformation';
 import GoodsPublish from './Page/GoodsPublish';
 import AddNewGoods from './Page/AddNewGoods';
+import Order from './Page/Order';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import { message } from 'antd';
 // import { HashRouter, Route, Redirect } from 'react-router-dom';
@@ -76,6 +77,21 @@ function App() {
               )
             }
           }} />
+
+        <Route exact path="/order" render={
+          () => {
+            if (isLogin && isLogin === 'wangyu') {
+              return (
+               <Order />
+              )
+            } else {
+              message.warning('请使用wangyu账户登录后查看')
+              return (
+                <Redirect to="/" />
+              )
+            }
+          }} />
+
 
 
 
