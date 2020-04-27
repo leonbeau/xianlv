@@ -40,7 +40,7 @@ export const getRegisterCode = (email) => {
     return (dispatch) => {
         axios({
             method: 'GET',
-            url: '/api/getCode?email=' + email,
+            url: 'http://120.79.56.242:8081/api/getCode?email=' + email,
         }).then((res) => {
             message.success(res.data.message);
         }).catch((error) => {
@@ -64,7 +64,7 @@ export const toRegister = (RegisterObject) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/reg',
+            url: 'http://120.79.56.242:8081/api/reg',
             data: data
         }).then((res) => {
             if (res.data.code === 0) {
@@ -121,7 +121,7 @@ export const toLogin = (LoginObject) => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            url: '/api/login?username=' + LoginObject.username + '&password=' + LoginObject.password,
+            url: 'http://120.79.56.242:8081/api/login?username=' + LoginObject.username + '&password=' + LoginObject.password,
             data: Qs.stringify(data)
         }).then((res) => {
             console.log(res);
@@ -165,7 +165,7 @@ export const logout = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/logout?username='+userid,
+            url: 'http://120.79.56.242:8081/api/logout?username='+userid,
         }).then((res) => {
             sessionStorage.removeItem("isLogin");
             dispatch(logoutDispatch());
@@ -189,7 +189,7 @@ export const getAllCategories = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoodsType',
+            url: 'http://120.79.56.242:8081/api/getGoodsType',
         }).then((res) => {
             console.log(res);
             dispatch(getAllCategoriesList(res.data));
@@ -231,7 +231,7 @@ export const deleteCategory = (categoryName) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authority': sessionStorage.getItem('token')
             },
-            url: '/api/m/admin/mealKind/' + categoryName,
+            url: 'http://120.79.56.242:8081/api/m/admin/mealKind/' + categoryName,
             data: Qs.stringify(data)
         }).then((res) => {
             if (res.data.success) {
@@ -262,7 +262,7 @@ export const editCategory = (oldCategoryName, newCategoryName) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authority': sessionStorage.getItem('token')
             },
-            url: '/api/m/admin/mealKind/' + oldCategoryName,
+            url: 'http://120.79.56.242:8081/api/m/admin/mealKind/' + oldCategoryName,
             data: Qs.stringify(data)
         }).then((res) => {
             if (res.data.success) {
@@ -293,7 +293,7 @@ export const deleteDishById = (dishId) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authority': sessionStorage.getItem('token')
             },
-            url: '/api/m/admin/meal/' + dishId,
+            url: 'http://120.79.56.242:8081/api/m/admin/meal/' + dishId,
             data: Qs.stringify(data)
         }).then((res) => {
             // console.log(res);
@@ -333,7 +333,7 @@ export const getMeMessage = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/findUser?username=' + userid,
+            url: 'http://120.79.56.242:8081/api/findUser?username=' + userid,
         }).then((res) => {
            console.log(res);
            if(res.data.status === 1){
@@ -380,7 +380,7 @@ export const editMeMessage = (meObj) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/updateUser' ,
+            url: 'http://120.79.56.242:8081/api/updateUser' ,
             data: data
         }).then((res) => {
             if(res.data.code === 1){
@@ -420,7 +420,7 @@ export const getMyPulishGoods = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/findMyGoods',
+            url: 'http://120.79.56.242:8081/api/findMyGoods',
         }).then((res) => {
             if(Array.isArray(res.data)){
                    dispatch(getMyPulishGoodsSave(res.data));
@@ -454,7 +454,7 @@ export const addGoods = (goodsObject) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/addGoods',
+            url: 'http://120.79.56.242:8081/api/addGoods',
             data: data
         }).then((res) => {
             console.log(res);
@@ -483,7 +483,7 @@ export const deleteGoodsItem = (gid) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/deleteGoodsByGid?gid='+gid,
+            url: 'http://120.79.56.242:8081/api/deleteGoodsByGid?gid='+gid,
         }).then((res) => {
             if(res.data.code === 1){
                 message.success(res.data.message);
@@ -553,7 +553,7 @@ export const editPublishGoods = (goodsObject,gid) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/updateGoods',
+            url: 'http://120.79.56.242:8081/api/updateGoods',
             data: data
         }).then((res) => {
             console.log(res);
@@ -586,7 +586,7 @@ export const getFirstPageGoods = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoods?page=1',
+            url: 'http://120.79.56.242:8081/api/getGoods?page=1',
         }).then((res) => {
             const goodsLength = res.data.length ;
             dispatch(saveTotalMount(goodsLength))
@@ -612,7 +612,7 @@ export const changeHomeDishesList = (selectKey) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoodsByType?type='+selectKey+'&page=1' ,
+            url: 'http://120.79.56.242:8081/api/getGoodsByType?type='+selectKey+'&page=1' ,
         }).then((res) => {
             console.log(res);
             dispatch(getSelectKeyDishesList(res.data));
@@ -639,7 +639,7 @@ export const getMyShoppingCart = (selectKey) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getshop' ,
+            url: 'http://120.79.56.242:8081/api/getshop' ,
         }).then((res) => {
             // console.log(res);
             //计算总费用
@@ -672,7 +672,7 @@ export const showGoodsDetail = (gid) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoodsById?gid='+gid ,
+            url: 'http://120.79.56.242:8081/api/getGoodsById?gid='+gid ,
         }).then((res) => {
             // console.log(res);
             dispatch(showGoodsDetailSave(res.data));
@@ -695,7 +695,7 @@ export const addGoodsToShoppingCart = (gid) => {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
             },
-            url: '/api/addShopping' ,
+            url: 'http://120.79.56.242:8081/api/addShopping' ,
             data:JSON.stringify(data) ,
         }).then((res) => {
             message.success('添加到购物车成功')
@@ -714,7 +714,7 @@ export const deleteShoppingCart = (gid) => {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
             },
-            url: 'api/deleteShopById?gid='+gid,
+            url: 'http://120.79.56.242:8081/api/deleteShopById?gid='+gid,
         }).then((res) => {
             message.success('删除购物车商品成功');
             history.push('/#/shoppingcart');
@@ -735,7 +735,7 @@ export const changeShoppingCartGoodsMount = (mount,gid) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/updateShoppingSum?gid='+gid+'&sum='+mount,
+            url: 'http://120.79.56.242:8081/api/updateShoppingSum?gid='+gid+'&sum='+mount,
         }).then((res) => {
             console.log(res);
             if(res.data === 'success'){
@@ -764,7 +764,7 @@ export const addOrder = (totalMoney) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: 'api/addDingDan?money='+totalMoney,
+            url: 'http://120.79.56.242:8081/api/addDingDan?money='+totalMoney,
         }).then((res) => {
             // console.log(res);
             if(res.data === 'success'){
@@ -794,7 +794,7 @@ export const showAllOrderList = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getDingdan',
+            url: 'http://120.79.56.242:8081/api/getDingdan',
         }).then((res) => {
             console.log(res);
             dispatch(orderListSave(res.data));
@@ -812,7 +812,7 @@ export const orderAgree = (id) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/agree?username=wangyu&did='+id,
+            url: 'http://120.79.56.242:8081/api/agree?username=wangyu&did='+id,
         }).then((res) => {
             console.log(res);
             if(res.data === 'success'){
@@ -834,7 +834,7 @@ export const orderDisagree = (id) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/noagree?did='+id,
+            url: 'http://120.79.56.242:8081/api/noagree?did='+id,
         }).then((res) => {
             console.log(res);
             if(res.data === 'success'){

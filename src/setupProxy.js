@@ -1,4 +1,4 @@
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
 
 
 // module.exports = function(app){
@@ -13,13 +13,13 @@ const proxy = require('http-proxy-middleware');
 //     app.use('/api',exampleProxy)
 // }
 
-module.exports = function(app){
-    app.use(
-        proxy(
-            '/api',{
-                target:'http://120.79.56.242:8081',
-                changeOrigin:true,
-            }
-        )
-    )
-}
+// module.exports = function(app){
+//     app.use(
+//         proxy(
+//             '/api',{
+//                 target:'http://120.79.56.242:8081',
+//                 changeOrigin:true,
+//             }
+//         )
+//     )
+// }
