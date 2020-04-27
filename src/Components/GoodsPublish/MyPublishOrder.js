@@ -13,8 +13,6 @@ class MyPublishOrder extends Component {
     editGoodsItem(gid){
         this.props.saveUserChooseEditGoodsGid(gid)
         this.props.showPublishGoodsEditModal()
-        console.log('editGoodsItem',gid);
-        // this.props.editGoodsItem(gid)
     }
     render() {
         return (
@@ -103,9 +101,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         showPublishGoodsEditModal:()=>{
             dispatch(actionCreators.showPublishGoodsEditModal())
-        },
-        editGoodsItem:(gid) => {
-            dispatch(actionCreators.editGoodsItem(gid))
         },
         saveUserChooseEditGoodsGid:(gid)=>{
             dispatch(actionCreators.saveUserChooseEditGoodsGid(gid))

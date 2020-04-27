@@ -82,33 +82,6 @@ export const toRegister = (RegisterObject) => {
 }
 
 
-// Paul-eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJQYXVsIiwic3ViIjoibGVvbkBob29jLnRvcCIsImp0aSI6IjIiLCJleHAiOjE1ODI5ODQxNjd9.LYi3-ZFmvmpGFWU5TXJjOUP-K9M4qRaxUGg2bXwaMOQRhoKWVz82a1inA-3PykpgSrjOiaOHvM2HPeBye-2uaw
-// 登录
-// export const toLogin = (LoginObject)=>{
-
-//     return (dispatch) => {
-
-
-//         axios({
-//             method:'post',
-//             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded',
-//                 'Authority':'Paul-eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJQYXVsIiwic3ViIjoibGVvbkBob29jLnRvcCIsImp0aSI6IjIiLCJleHAiOjE1ODI5ODQxNjd9.LYi3-ZFmvmpGFWU5TXJjOUP-K9M4qRaxUGg2bXwaMOQRhoKWVz82a1inA-3PykpgSrjOiaOHvM2HPeBye-2uaw'
-
-//             },
-//             url:'/api/m/mealKind/酒水饮品',
-
-//         }).then((res)=>{
-//             console.log(res.data);
-
-
-
-//         }).catch((error)=>{
-//             message.error('登录失败：',error);
-//         })
-//     }
-// }
-
 // 登录  --------------------------------------------------------------------
 export const toLogin = (LoginObject) => {
     // console.log('actioncreateorLogin');
@@ -124,10 +97,10 @@ export const toLogin = (LoginObject) => {
             url: 'http://120.79.56.242:8081/api/login?username=' + LoginObject.username + '&password=' + LoginObject.password,
             data: Qs.stringify(data)
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
 
             if (res.data.code === 0) {
-                console.log(res.data)
+                // console.log(res.data)
                 message.success('登录成功');
                 dispatch(loginSuccessSaveState(res.data.data));
                 // 登录成功保存状态和token到sessionStroge
@@ -191,7 +164,7 @@ export const getAllCategories = () => {
             },
             url: 'http://120.79.56.242:8081/api/getGoodsType',
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(getAllCategoriesList(res.data));
         }).catch((error) => {
             message.error('获取失败：', error);
@@ -335,7 +308,7 @@ export const getMeMessage = () => {
             },
             url: 'http://120.79.56.242:8081/api/findUser?username=' + userid,
         }).then((res) => {
-           console.log(res);
+        //    console.log(res);
            if(res.data.status === 1){
             dispatch(saveMeMessage(res.data));
            }else{
@@ -390,7 +363,7 @@ export const editMeMessage = (meObj) => {
             }else{
                 message.success(res.data.message);
             }
-            console.log(res);
+            // console.log(res);
 
         }).catch((error) => {
             message.error('更改个人信息失败：', error);
@@ -425,7 +398,7 @@ export const getMyPulishGoods = () => {
             if(Array.isArray(res.data)){
                    dispatch(getMyPulishGoodsSave(res.data));
             }
-           console.log(res);
+        //    console.log(res);
         }).catch((error) => {
             message.error('获取失败：', error);
         })
@@ -434,7 +407,7 @@ export const getMyPulishGoods = () => {
 
 //增加我发布的商品
 export const addGoods = (goodsObject) => {
-    console.log(goodsObject);
+    // console.log(goodsObject);
     
     return (dispatch) => {
         let data = {
@@ -457,7 +430,7 @@ export const addGoods = (goodsObject) => {
             url: 'http://120.79.56.242:8081/api/addGoods',
             data: data
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             
             if (res.data === "success") {
                 message.success('增加我的发布商品成功');
@@ -512,29 +485,11 @@ export const cancelPublishGoodsEditModal = () => ({
     type: actionTypes.CANCEL_PUBLISH_GOODS_EDIT_MODAL,
 })
 
-//编辑我发布的商品
-export const editGoodsItem = (gid) => {
-    // return (dispatch) => {
-    //     axios({
-    //         method: 'get',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         url: '/api/deleteGoodsByGid?gid='+gid,
-    //     }).then((res) => {
-    //         if(res.data.code === 1){
-    //             message.success(res.data.message)
-    //         }
-    //     //    console.log(res);
-    //     }).catch((error) => {
-    //         message.error('删除失败：', error);
-    //     })
-    // }
-}
+
 
 //增加我发布的商品
 export const editPublishGoods = (goodsObject,gid) => {
-    console.log(goodsObject);
+    // console.log(goodsObject);
     
     return (dispatch) => {
         let data = {
@@ -556,7 +511,7 @@ export const editPublishGoods = (goodsObject,gid) => {
             url: 'http://120.79.56.242:8081/api/updateGoods',
             data: data
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             
             if (res.data === "success") {
                 message.success('编辑我的发布商品'+gid+'成功');
@@ -614,7 +569,7 @@ export const changeHomeDishesList = (selectKey) => {
             },
             url: 'http://120.79.56.242:8081/api/getGoodsByType?type='+selectKey+'&page=1' ,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(getSelectKeyDishesList(res.data));
 
         }).catch((error) => {
@@ -737,7 +692,7 @@ export const changeShoppingCartGoodsMount = (mount,gid) => {
             },
             url: 'http://120.79.56.242:8081/api/updateShoppingSum?gid='+gid+'&sum='+mount,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             if(res.data === 'success'){
                 message.success('更新购物车商品成功');
                 history.push('/#/shoppingcart');
@@ -796,7 +751,7 @@ export const showAllOrderList = () => {
             },
             url: 'http://120.79.56.242:8081/api/getDingdan',
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(orderListSave(res.data));
 
         }).catch((error) => {
@@ -814,7 +769,7 @@ export const orderAgree = (id) => {
             },
             url: 'http://120.79.56.242:8081/api/agree?username=wangyu&did='+id,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             if(res.data === 'success'){
                 message.success('已同意订单');
                 history.push('/#/order');
@@ -836,7 +791,7 @@ export const orderDisagree = (id) => {
             },
             url: 'http://120.79.56.242:8081/api/noagree?did='+id,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             if(res.data === 'success'){
                 message.success('已不同意订单');
                 history.push('/#/order');
