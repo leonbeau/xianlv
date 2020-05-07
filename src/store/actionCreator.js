@@ -71,7 +71,7 @@ export const toRegister = (RegisterObject) => {
                 // 跳转到登录页
                 message.success(res.data.message);
                 dispatch(toLoginMain());
-            }else{
+            } else {
                 message.warning(res.data.message);
             }
         }).catch((error) => {
@@ -81,33 +81,6 @@ export const toRegister = (RegisterObject) => {
     }
 }
 
-
-// Paul-eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJQYXVsIiwic3ViIjoibGVvbkBob29jLnRvcCIsImp0aSI6IjIiLCJleHAiOjE1ODI5ODQxNjd9.LYi3-ZFmvmpGFWU5TXJjOUP-K9M4qRaxUGg2bXwaMOQRhoKWVz82a1inA-3PykpgSrjOiaOHvM2HPeBye-2uaw
-// 登录
-// export const toLogin = (LoginObject)=>{
-
-//     return (dispatch) => {
-
-
-//         axios({
-//             method:'post',
-//             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded',
-//                 'Authority':'Paul-eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJQYXVsIiwic3ViIjoibGVvbkBob29jLnRvcCIsImp0aSI6IjIiLCJleHAiOjE1ODI5ODQxNjd9.LYi3-ZFmvmpGFWU5TXJjOUP-K9M4qRaxUGg2bXwaMOQRhoKWVz82a1inA-3PykpgSrjOiaOHvM2HPeBye-2uaw'
-
-//             },
-//             url:'/api/m/mealKind/酒水饮品',
-
-//         }).then((res)=>{
-//             console.log(res.data);
-
-
-
-//         }).catch((error)=>{
-//             message.error('登录失败：',error);
-//         })
-//     }
-// }
 
 // 登录  --------------------------------------------------------------------
 export const toLogin = (LoginObject) => {
@@ -124,18 +97,18 @@ export const toLogin = (LoginObject) => {
             url: '/api/login?username=' + LoginObject.username + '&password=' + LoginObject.password,
             data: Qs.stringify(data)
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
 
             if (res.data.code === 0) {
-                console.log(res.data)
+                // console.log(res.data)
                 message.success('登录成功');
                 dispatch(loginSuccessSaveState(res.data.data));
                 // 登录成功保存状态和token到sessionStroge
                 sessionStorage.setItem('isLogin', res.data.data);
                 //跳转到主页
-                    history.push('/#/');
-                    setTimeout(() => history.go(), 1600);
-            
+                history.push('/#/');
+                setTimeout(() => history.go(), 1600);
+
                 dispatch(cancelModal());
             } else {
                 message.warning(res.data.message);
@@ -165,7 +138,7 @@ export const logout = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/logout?username='+userid,
+            url: '/api/logout?username=' + userid,
         }).then((res) => {
             sessionStorage.removeItem("isLogin");
             dispatch(logoutDispatch());
@@ -191,7 +164,7 @@ export const getAllCategories = () => {
             },
             url: '/api/getGoodsType',
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(getAllCategoriesList(res.data));
         }).catch((error) => {
             message.error('获取失败：', error);
@@ -335,12 +308,12 @@ export const getMeMessage = () => {
             },
             url: '/api/findUser?username=' + userid,
         }).then((res) => {
-           console.log(res);
-           if(res.data.status === 1){
-            dispatch(saveMeMessage(res.data));
-           }else{
-               message.warning('警告')
-           }
+            //    console.log(res);
+            if (res.data.status === 1) {
+                dispatch(saveMeMessage(res.data));
+            } else {
+                message.warning('警告')
+            }
 
         }).catch((error) => {
             message.error('获取失败：', error);
@@ -372,7 +345,7 @@ export const editMeMessage = (meObj) => {
             password: meObj.newPassword,
             vx: meObj.newVx,
             qq: meObj.newQQ,
-            phone:meObj.newPhone ,
+            phone: meObj.newPhone,
         };
         // console.log('actionCreator data',data); 
         axios({
@@ -380,17 +353,17 @@ export const editMeMessage = (meObj) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/updateUser' ,
+            url: '/api/updateUser',
             data: data
         }).then((res) => {
-            if(res.data.code === 1){
+            if (res.data.code === 1) {
                 message.success(res.data.message);
                 history.push('/#/me');
                 setTimeout(() => history.go(), 1600);
-            }else{
+            } else {
                 message.success(res.data.message);
             }
-            console.log(res);
+            // console.log(res);
 
         }).catch((error) => {
             message.error('更改个人信息失败：', error);
@@ -410,7 +383,7 @@ export const editMeMessage = (meObj) => {
 //查询我发布的商品
 export const getMyPulishGoodsSave = (data) => ({
     type: actionTypes.MY_PUBLISH_GOODS,
-    data:data
+    data: data
 })
 
 export const getMyPulishGoods = () => {
@@ -422,10 +395,10 @@ export const getMyPulishGoods = () => {
             },
             url: '/api/findMyGoods',
         }).then((res) => {
-            if(Array.isArray(res.data)){
-                   dispatch(getMyPulishGoodsSave(res.data));
+            if (Array.isArray(res.data)) {
+                dispatch(getMyPulishGoodsSave(res.data));
             }
-           console.log(res);
+            //    console.log(res);
         }).catch((error) => {
             message.error('获取失败：', error);
         })
@@ -434,16 +407,16 @@ export const getMyPulishGoods = () => {
 
 //增加我发布的商品
 export const addGoods = (goodsObject) => {
-    console.log(goodsObject);
-    
+    // console.log(goodsObject);
+
     return (dispatch) => {
         let data = {
             name: goodsObject.goodsName,
             type: goodsObject.goodsType,
-            price: parseFloat(goodsObject.goodsUnitPrice) ,
+            price: parseFloat(goodsObject.goodsUnitPrice),
             sum: parseInt(goodsObject.goodsSum),
             beizhu: goodsObject.goodsDescribe,
-            path:goodsObject.dishPicture.file.response,
+            path: goodsObject.dishPicture.file.response,
         }
         // console.log('actionCreator data',data);
 
@@ -457,8 +430,8 @@ export const addGoods = (goodsObject) => {
             url: '/api/addGoods',
             data: data
         }).then((res) => {
-            console.log(res);
-            
+            // console.log(res);
+
             if (res.data === "success") {
                 message.success('增加我的发布商品成功');
                 history.push('/#/publish');
@@ -483,14 +456,14 @@ export const deleteGoodsItem = (gid) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/deleteGoodsByGid?gid='+gid,
+            url: '/api/deleteGoodsByGid?gid=' + gid,
         }).then((res) => {
-            if(res.data.code === 1){
+            if (res.data.code === 1) {
                 message.success(res.data.message);
                 history.push('/#/publish');
                 setTimeout(() => history.go(), 1600);
             }
-        //    console.log(res);
+            //    console.log(res);
         }).catch((error) => {
             message.error('删除失败：', error);
         })
@@ -512,39 +485,21 @@ export const cancelPublishGoodsEditModal = () => ({
     type: actionTypes.CANCEL_PUBLISH_GOODS_EDIT_MODAL,
 })
 
-//编辑我发布的商品
-export const editGoodsItem = (gid) => {
-    // return (dispatch) => {
-    //     axios({
-    //         method: 'get',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         url: '/api/deleteGoodsByGid?gid='+gid,
-    //     }).then((res) => {
-    //         if(res.data.code === 1){
-    //             message.success(res.data.message)
-    //         }
-    //     //    console.log(res);
-    //     }).catch((error) => {
-    //         message.error('删除失败：', error);
-    //     })
-    // }
-}
+
 
 //增加我发布的商品
-export const editPublishGoods = (goodsObject,gid) => {
-    console.log(goodsObject);
-    
+export const editPublishGoods = (goodsObject, gid) => {
+    // console.log(goodsObject);
+
     return (dispatch) => {
         let data = {
             gid: gid,
             name: goodsObject.goodsName,
             type: goodsObject.goodsType,
-            price: parseFloat(goodsObject.goodsUnitPrice) ,
+            price: parseFloat(goodsObject.goodsUnitPrice),
             sum: parseInt(goodsObject.goodsSum),
             beizhu: goodsObject.goodsDescribe,
-            path:goodsObject.dishPicture.file.response,
+            path: goodsObject.dishPicture.file.response,
         }
 
 
@@ -556,10 +511,10 @@ export const editPublishGoods = (goodsObject,gid) => {
             url: '/api/updateGoods',
             data: data
         }).then((res) => {
-            console.log(res);
-            
+            // console.log(res);
+
             if (res.data === "success") {
-                message.success('编辑我的发布商品'+gid+'成功');
+                message.success('编辑我的发布商品' + gid + '成功');
                 history.push('/#/publish');
                 setTimeout(() => history.go(), 1600);
             } else {
@@ -588,7 +543,7 @@ export const getFirstPageGoods = () => {
             },
             url: '/api/getGoods?page=1',
         }).then((res) => {
-            const goodsLength = res.data.length ;
+            const goodsLength = res.data.length;
             dispatch(saveTotalMount(goodsLength))
             dispatch(getSelectKeyDishesList(res.data));
         }).catch((error) => {
@@ -612,9 +567,9 @@ export const changeHomeDishesList = (selectKey) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoodsByType?type='+selectKey+'&page=1' ,
+            url: '/api/getGoodsByType?type=' + selectKey + '&page=1',
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(getSelectKeyDishesList(res.data));
 
         }).catch((error) => {
@@ -639,12 +594,12 @@ export const getMyShoppingCart = (selectKey) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getshop' ,
+            url: '/api/getshop',
         }).then((res) => {
             // console.log(res);
             //计算总费用
             let sum = 0;
-            res.data.map((item,index)=>{
+            res.data.map((item, index) => {
                 const singleMoney = parseFloat(item.price) * parseInt(item.shoppingsum);
                 sum = singleMoney + sum
                 return sum
@@ -672,7 +627,7 @@ export const showGoodsDetail = (gid) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/getGoodsById?gid='+gid ,
+            url: '/api/getGoodsById?gid=' + gid,
         }).then((res) => {
             // console.log(res);
             dispatch(showGoodsDetailSave(res.data));
@@ -695,8 +650,8 @@ export const addGoodsToShoppingCart = (gid) => {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
             },
-            url: '/api/addShopping' ,
-            data:JSON.stringify(data) ,
+            url: '/api/addShopping',
+            data: JSON.stringify(data),
         }).then((res) => {
             message.success('添加到购物车成功')
 
@@ -714,7 +669,7 @@ export const deleteShoppingCart = (gid) => {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
             },
-            url: 'api/deleteShopById?gid='+gid,
+            url: '/api/deleteShopById?gid=' + gid,
         }).then((res) => {
             message.success('删除购物车商品成功');
             history.push('/#/shoppingcart');
@@ -728,17 +683,17 @@ export const deleteShoppingCart = (gid) => {
 
 //更新购物车商品的数量
 
-export const changeShoppingCartGoodsMount = (mount,gid) => {
+export const changeShoppingCartGoodsMount = (mount, gid) => {
     return (dispatch) => {
         axios({
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/updateShoppingSum?gid='+gid+'&sum='+mount,
+            url: '/api/updateShoppingSum?gid=' + gid + '&sum=' + mount,
         }).then((res) => {
-            console.log(res);
-            if(res.data === 'success'){
+            // console.log(res);
+            if (res.data === 'success') {
                 message.success('更新购物车商品成功');
                 history.push('/#/shoppingcart');
                 setTimeout(() => history.go(), 800);
@@ -764,10 +719,10 @@ export const addOrder = (totalMoney) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: 'api/addDingDan?money='+totalMoney,
+            url: '/api/addDingDan?money=' + totalMoney,
         }).then((res) => {
             // console.log(res);
-            if(res.data === 'success'){
+            if (res.data === 'success') {
                 message.success('下单成功');
             }
 
@@ -796,7 +751,7 @@ export const showAllOrderList = () => {
             },
             url: '/api/getDingdan',
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             dispatch(orderListSave(res.data));
 
         }).catch((error) => {
@@ -812,10 +767,10 @@ export const orderAgree = (id) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/agree?username=wangyu&did='+id,
+            url: '/api/agree?username=wangyu&did=' + id,
         }).then((res) => {
-            console.log(res);
-            if(res.data === 'success'){
+            // console.log(res);
+            if (res.data === 'success') {
                 message.success('已同意订单');
                 history.push('/#/order');
                 setTimeout(() => history.go(), 800);
@@ -834,10 +789,10 @@ export const orderDisagree = (id) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/noagree?did='+id,
+            url: '/api/noagree?did=' + id,
         }).then((res) => {
-            console.log(res);
-            if(res.data === 'success'){
+            // console.log(res);
+            if (res.data === 'success') {
                 message.success('已不同意订单');
                 history.push('/#/order');
                 setTimeout(() => history.go(), 800);
