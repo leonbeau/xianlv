@@ -31,7 +31,7 @@ class SingleCard extends Component {
                                     this.props.isLogin === true || sessionStorage.getItem('isLogin') != null ?
                                     <Button type="primary" onClick={()=>this.addToShoppingCart(this.props.item.gid)}>加入购物车</Button>
                                     :
-                                    <Button type="primary">立即订购</Button>
+                                    <Button type="primary" onClick={()=>this.props.showModal()}>立即订购</Button>
                                 }
                                 
                             </span>
@@ -54,7 +54,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addGoodsToShoppingCart: (gid) => {
             dispatch(actionCreators.addGoodsToShoppingCart(gid))
-        }
+        },
+        showModal(){
+            dispatch(actionCreators.showModal())
+        },
     }
 }
 

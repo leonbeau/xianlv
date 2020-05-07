@@ -32,7 +32,12 @@ class OrderList extends Component {
                                                 <span className="order_message">
                                                     <div className="single_order_name">{item.username}</div>
                                                     <div className="single_order_mount">id: {item.did}</div>
-                                                    <div className="single_order_mount">状态: {item.status===0 ? '未同意':'已同意'}</div>
+                                                    <div className="single_order_mount">
+                                                        状态: 
+                                                        {item.status===0 ? '未审批':''}
+                                                        {item.status===1 ? '已同意':''}
+                                                        {item.status===2 ? '已拒绝':''}
+                                                    </div>
                                                     
                                                 </span>
                                                 {/* 总价 */}

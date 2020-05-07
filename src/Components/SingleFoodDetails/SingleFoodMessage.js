@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import './SingleFoodMessage.css';
 import './SingleFoodMessage.m.css';
 import { Button, Input } from 'antd';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../store/actionCreator';
 const { TextArea } = Input;
 
-export default class SingleFoodMessage extends Component {
+class SingleFoodMessage extends Component {
 
     render() {
         return (
@@ -23,7 +25,14 @@ export default class SingleFoodMessage extends Component {
                             <div className="unit_price_and_btn">
 
                                 <span className="unit_price">{this.props.goods.price}元</span>
-                                <span className="unit_btn"><Button type="primary" size="large">加入购物车</Button></span>
+                                <span className="unit_btn">
+                                {
+                                    this.props.isLogin === true || sessionStorage.getItem('isLogin') != null ?
+                                    <Button type="primary" size="large" onClick={()=>this.addToShoppingCart(this.props.item.gid)}>加入购物车</Button>
+                                    :
+                                    <Button type="primary" size="large" onClick={()=>this.props.showModal()}>立即订购</Button>
+                                }
+                                </span>
 
                             </div>
                         </span>
@@ -36,3 +45,19 @@ export default class SingleFoodMessage extends Component {
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLogin: state.get('isLogin')
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        showModal(){
+            dispatch(actionCreators.showModal())
+        },
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SingleFoodMessage) ;

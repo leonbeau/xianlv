@@ -105,7 +105,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(actionCreators.showPublishGoodsEditModal())
         },
         editGoodsItem:(gid) => {
-            dispatch(actionCreators.editGoodsItem(gid))
+            dispatch(actionCreators.editPublishGoods(gid))
         },
         saveUserChooseEditGoodsGid:(gid)=>{
             dispatch(actionCreators.saveUserChooseEditGoodsGid(gid))
