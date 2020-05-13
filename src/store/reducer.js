@@ -23,6 +23,8 @@ const defaultState = fromJS({
     shoppingCartTotalPrice:0,
     adminOrderList:[],
     customerOrderList:[],
+    salemanOrderList:[],
+    allExpressOrder:[]
 });
 
 export default (state = defaultState, action) => {
@@ -98,6 +100,10 @@ export default (state = defaultState, action) => {
             return state.set('adminOrderList',action.data);
         case actionTypes.CUSTOMER_ORDER_LIST:
             return state.set('customerOrderList',action.data);
+        case actionTypes.SALEMAN_ORDER_LIST:
+            return state.set('salemanOrderList',action.data);
+        case actionTypes.ALL_EXPRESS_ORDER:
+            return state.set('allExpressOrder',action.data)
         default:
             return state;
     }

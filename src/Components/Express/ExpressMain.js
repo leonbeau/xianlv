@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Button} from 'antd';
 import * as actionCreators from '../../store/actionCreator';
-import './IamSalemanMain.css';
+import './ExpressMain.css';
 class IamSalemanMain extends Component {
   
     render() {
@@ -17,37 +17,35 @@ class IamSalemanMain extends Component {
                     <div className="myorder_content">
                         {/* 该区域名 */}
                         <div className="myorder_title">
-                            订单列表
+                            订单列表(物流信息)
                         </div>
 
                         {
-                            this.props.salemanOrderList.map((item,index) => {
+                            this.props.allExpressOrder.map((item,index) => {
                                 return (
                                     <>
                                         {/* 一个订单 */}
                     
-                                        <div className="single_order" key={item.goods.gid}>
+                                        <div className="single_order" key={item.gid}>
                                             {/* 图片 */}
-                                            <span className="order_food_picture">
-                                                <img src={"http://120.79.56.242:8080/"+item.goods.path}/>
-                                            </span>
+                                           
                                             <div className="order_other_things">
                                                 {/* 名称时间数量 */}
                                                 <span className="order_message">
-                                                    <div className="single_order_name">{item.goods.name}</div>
-                                                    <div className="single_order_time">类型: {item.goods.type}</div>
-                                                    <div className="single_order_mount">数量: {item.goods.sum}</div>
-                                                    <div className="single_order_mount">总价: ￥{item.goods.price}</div>
+                                                    <div className="single_order_name">{item.username}</div>
+            
+                                                    <div className="single_order_mount">数量: {item.sum}</div>
+                                                   
                                                 </span>
                                                 {/* 总价 */}
                                                 <span className="order_total_price">
-                                                备注: {item.goods.beizhu}
+                                                总价: ￥{item.money}
                                                    
                                                 </span>
                                                 {/* 状态 */}
                                                 <span className="order_status">
-                                                <Button onClick={()=>this.props.agreeOrder(item.danzi.did)}  size="small" style={{margin:"0 4px"}}>同意</Button>
-                                                <Button onClick={()=>this.props.disagreeOrder(item.danzi.did)} size="small" type="danger">不同意</Button>
+                                            
+                                                <Button onClick={()=>this.props.removeOrder(item.gid)} size="small" type="danger">删除订单</Button>
                                                 </span>
                                             </div>
 
@@ -70,26 +68,24 @@ class IamSalemanMain extends Component {
         )
     }
     componentDidMount() {
-        this.props.getSalemanOrders()
+        this.props.getAllOrderExpress()
     }
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        salemanOrderList: state.get('salemanOrderList')
+        allExpressOrder: state.get('allExpressOrder')
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
 // 新的
-        getSalemanOrders:()=>{
-            dispatch(actionCreators.getSalemanOrders())
+    getAllOrderExpress:()=>{
+            dispatch(actionCreators.getAllOrderExpress())
         },
-        agreeOrder:(did)=>{
-            dispatch(actionCreators.agreeOrder(did));
+        removeOrder:(gid)=>{
+            dispatch(actionCreators.removeOrder(gid));
         },
-        disagreeOrder:(did)=>{
-            dispatch(actionCreators.disagreeOrder(did));
-        }
+       
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(IamSalemanMain);

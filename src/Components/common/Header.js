@@ -83,7 +83,13 @@ class Header extends Component {
                                         <Menu.Item key="setting:7" style={{textAlign:"center"}}><a onClick={()=>this.logout()}>退出登录</a></Menu.Item>
                                         {
                                             sessionStorage.getItem('isLogin') == 'wangyu' ? 
-                                            <Menu.Item key="setting:8" style={{textAlign:"center"}}><Link to="/order">所有订单审批</Link></Menu.Item>
+                                            <Menu.Item key="setting:8" style={{textAlign:"center"}}><Link to="/order">订单审批(管理员)</Link></Menu.Item>
+                                            :
+                                            ''
+                                        }
+                                         {
+                                            sessionStorage.getItem('isLogin') == 'wangyu' ? 
+                                            <Menu.Item key="setting:9" style={{textAlign:"center"}}><Link to="/express">物流信息(管理员)</Link></Menu.Item>
                                             :
                                             ''
                                         }

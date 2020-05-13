@@ -11,7 +11,7 @@ function Order(){
              <Row type="flex" justify="center" >
                 {/* banner栏 */}
                 <Col xs={24} sm={24} md={16} lg={19} xl={16}>
-                    <CommonBanner commonbannerTitle="订单管理"/>
+                    <CommonBanner commonbannerTitle="审批订单（管理员）"/>
                     <OrderList />
                     
                     {/* 页脚 */}

@@ -10,6 +10,7 @@ import GoodsPublish from './Page/GoodsPublish';
 import AddNewGoods from './Page/AddNewGoods';
 import IamCustomer from './Page/IamCustomer';
 import IamSaleman from './Page/IamSaleman';
+import Express from './Page/Express';
 import Order from './Page/Order';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import { message } from 'antd';
@@ -107,6 +108,22 @@ function App() {
               )
             }
           }} />
+
+        <Route exact path="/express" render={
+          () => {
+            if (isLogin) {
+              return (
+                <Express />
+              )
+            } else {
+              message.warning('请登录后查看')
+              return (
+                <Redirect to="/" />
+              )
+            }
+          }} />
+
+
 
         <Route exact path="/order" render={
           () => {

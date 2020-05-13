@@ -872,9 +872,120 @@ export const confirmOrder = (did) => {
         }).then((res) => {
             if(res.data === 'success'){
                 message.success('确认收货成功');
+                history.push('/#/customer');
+                setTimeout(() => history.go(), 1600);
             }
         }).catch((error) => {
             message.error('确认收货失败', error);
+        })
+    }
+}
+
+//卖家查看所有订单
+export const salemanOrdersList = (orderlist) => ({
+    type: actionTypes.SALEMAN_ORDER_LIST,
+    data: orderlist
+})
+export const getSalemanOrders = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getDanzi',
+        }).then((res) => {
+            // console.log(res.data);
+            dispatch(salemanOrdersList(res.data))
+
+        }).catch((error) => {
+            message.error('获取卖家订单失败', error);
+        })
+    }
+}
+
+//卖家不同意订单
+export const disagreeOrder = (did) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/noagreeDanzi?did='+did,
+        }).then((res) => {
+            if(res.data === 'success'){
+                message.success('不同意订单成功');
+                history.push('/#/customer');
+                setTimeout(() => history.go(), 1600);
+            }
+        }).catch((error) => {
+            message.error('不同意订单失败', error);
+        })
+    }
+}
+//卖家同意订单
+export const agreeOrder = (did) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/agreeDanzi?did='+did,
+        }).then((res) => {
+            if(res.data === 'success'){
+                message.success('同意订单成功');
+                history.push('/#/saleman');
+                setTimeout(() => history.go(), 1600);
+            }
+        }).catch((error) => {
+            message.error('同意订单失败', error);
+        })
+    }
+}
+
+//管理员查看所有的物流信息单
+
+export const allExpressOrdersList = (orderlist) => ({
+    type: actionTypes.ALL_EXPRESS_ORDER,
+    data: orderlist
+})
+export const getAllOrderExpress = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getAllDanzi',
+        }).then((res) => {
+            // console.log(res.data);
+            dispatch(allExpressOrdersList(res.data))
+
+        }).catch((error) => {
+            message.error('获取订单失败', error);
+        })
+    }
+}
+
+//删除订单
+export const removeOrder = (gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/deleteGoods?gid='+gid,
+        }).then((res) => {
+            if(res.data === 'success'){
+                message.success('删除订单成功');
+                history.push('/#/express');
+                setTimeout(() => history.go(), 1600);
+            }
+        }).catch((error) => {
+            message.error('删除订单失败', error);
         })
     }
 }

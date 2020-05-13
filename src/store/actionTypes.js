@@ -43,3 +43,7 @@ export const SHOPPING_CART_TOTAL_PRICE = 'shopping_cart_total_price'
 export const ADMIN_ORDER_LIST = 'admin_order_list';
 //买家订单列表
 export const CUSTOMER_ORDER_LIST = 'customer_order_list';
+//卖家订单列表
+export const SALEMAN_ORDER_LIST = 'saleman_order_list';
+//所有物流单子
+export const ALL_EXPRESS_ORDER = 'all_express_order';
