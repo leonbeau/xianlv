@@ -836,3 +836,45 @@ export const toRetrievePassword = (username) => {
         })
     }
 }
+
+//买家查看所有订单
+export const customerOrdersList = (orderlist) => ({
+    type: actionTypes.CUSTOMER_ORDER_LIST,
+    data: orderlist
+})
+export const getCustomerOrders = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getWuliu',
+        }).then((res) => {
+            // console.log(res.data);
+            dispatch(customerOrdersList(res.data))
+
+        }).catch((error) => {
+            message.error('获取买家订单失败', error);
+        })
+    }
+}
+
+//买家确认收货
+export const confirmOrder = (did) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/recevied?did='+did,
+        }).then((res) => {
+            if(res.data === 'success'){
+                message.success('确认收货成功');
+            }
+        }).catch((error) => {
+            message.error('确认收货失败', error);
+        })
+    }
+}

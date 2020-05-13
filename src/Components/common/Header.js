@@ -75,15 +75,19 @@ class Header extends Component {
                                     }
                                     >
                                     {/* <Menu.ItemGroup> */}
-                                        <Menu.Item key="setting:3"><Link to="/me">我的主页</Link></Menu.Item>
-                                        <Menu.Item key="setting:4"><Link to="/publish">我的发布</Link></Menu.Item>
+                                        <Menu.Item key="setting:3" style={{textAlign:"center"}}><Link to="/me">我的主页</Link></Menu.Item>
+                                        <Menu.Item key="setting:4" style={{textAlign:"center"}}><Link to="/publish">我的发布</Link></Menu.Item>
+                                        <Menu.Item key="setting:5" style={{textAlign:"center"}}><Link to="/customer">我是买家</Link></Menu.Item>
+                                        <Menu.Item key="setting:6" style={{textAlign:"center"}}><Link to="/saleman">我是卖家</Link></Menu.Item>
+                                       
+                                        <Menu.Item key="setting:7" style={{textAlign:"center"}}><a onClick={()=>this.logout()}>退出登录</a></Menu.Item>
                                         {
                                             sessionStorage.getItem('isLogin') == 'wangyu' ? 
-                                            <Menu.Item key="setting:6"><Link to="/order">订单管理</Link></Menu.Item>
+                                            <Menu.Item key="setting:8" style={{textAlign:"center"}}><Link to="/order">所有订单审批</Link></Menu.Item>
                                             :
                                             ''
                                         }
-                                        <Menu.Item key="setting:5"><a onClick={()=>this.logout()}>退出登录</a></Menu.Item>
+                                       
                                     {/* </Menu.ItemGroup> */}
                                     </SubMenu>
                                     }
