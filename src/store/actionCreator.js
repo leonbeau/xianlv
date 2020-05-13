@@ -712,19 +712,29 @@ export const changeShoppingCartGoodsMount = (mount, gid) => {
  * 把购物车商品加入购物车
  */
 
-export const addOrder = (totalMoney) => {
+export const addOrder = (goods) => {
+    let goodsData = [];
+    for (var i = 0; i < goods.length; i++) {
+        var newObject = {};
+        newObject.gid = goods[i].gid;
+        newObject.sum = goods[i].shoppingsum;
+        goodsData.push(newObject);
+    }
+    console.log(JSON.stringify(goodsData));
+    
     return (dispatch) => {
         axios({
-            method: 'get',
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json',
             },
-            url: '/api/addDingDan?money=' + totalMoney,
+            url: '/api/addDingDan',
+            data: JSON.stringify(goodsData),
         }).then((res) => {
-            // console.log(res);
-            if (res.data === 'success') {
-                message.success('下单成功');
-            }
+            console.log(res);
+            // if (res.data === 'success') {
+            //     message.success('下单成功');
+            // }
 
         }).catch((error) => {
             message.error('下单失败', error);
@@ -751,7 +761,7 @@ export const showAllOrderList = () => {
             },
             url: '/api/getDingdan',
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
             dispatch(orderListSave(res.data));
 
         }).catch((error) => {
@@ -800,6 +810,29 @@ export const orderDisagree = (id) => {
 
         }).catch((error) => {
             message.error('不同意订单失败', error);
+        })
+    }
+}
+
+//找回密码
+export const toRetrievePassword = (username) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/findPassword?username=' + username,
+        }).then((res) => {
+            console.log(res);
+            if (res.data.code === 1) {
+                message.success(res.data.message);
+                history.push('/#/');
+                setTimeout(() => history.go(), 1600);
+            }
+
+        }).catch((error) => {
+            message.error('找回密码失败', error);
         })
     }
 }

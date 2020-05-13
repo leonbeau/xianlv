@@ -54,7 +54,7 @@ class ShoppingCartMain extends Component {
                         <div className="shoppingcart_footer">
                             <div className="footer_area">
                                 <span className="footer_btn">
-                                    <Button size="large" type="primary" onClick={()=>this.addOrder(this.props.shoppingCartTotalPrice)}>去结算</Button>
+                                    <Button size="large" type="primary" onClick={()=>this.addOrder(this.props.shoppingCartGoods)}>去结算</Button>
                                 </span>
                                 <span className="footer_money">
                                     总计金额:
@@ -84,8 +84,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getMyShoppingCart: () => {
             dispatch(actionCreators.getMyShoppingCart())
         },
-        addOrder:(totalPrice) => {
-            dispatch(actionCreators.addOrder(totalPrice))
+        addOrder:(goods) => {
+            dispatch(actionCreators.addOrder(goods))
         }
 
     }
