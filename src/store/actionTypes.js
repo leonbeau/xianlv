@@ -47,3 +47,5 @@ export const CUSTOMER_ORDER_LIST = 'customer_order_list';
 export const SALEMAN_ORDER_LIST = 'saleman_order_list';
 //所有物流单子
 export const ALL_EXPRESS_ORDER = 'all_express_order';
+//查看收藏的列表
+export const ALL_COLLECT_ORDER = 'all_collect_list';

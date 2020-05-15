@@ -15,6 +15,7 @@ class SingleFoodMessage extends Component {
                     {/* 菜品信息区域 */}
                     <div className="food_message_area">
                         <span className="food_pic">
+
                             <img src={"http://120.79.56.242:8080/" + this.props.goods.path} />
                         </span>
                         <span className="food_message">
@@ -28,7 +29,10 @@ class SingleFoodMessage extends Component {
                                 <span className="unit_btn">
                                 {
                                     this.props.isLogin === true || sessionStorage.getItem('isLogin') != null ?
-                                    <Button type="primary" size="large" onClick={()=>this.addToShoppingCart(this.props.item.gid)}>加入购物车</Button>
+                                    <>
+                                    <Button size="large" style={{margin:"0 8px"}} onClick={()=>this.props.addCollect(this.props.goods.gid)}>加入收藏</Button>
+                                    <Button type="primary" size="large" onClick={()=>this.props.addToShoppingCart(this.props.goods.gid)}>加入购物车</Button>
+                                    </>
                                     :
                                     <Button type="primary" size="large" onClick={()=>this.props.showModal()}>立即订购</Button>
                                 }
@@ -57,6 +61,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         showModal(){
             dispatch(actionCreators.showModal())
         },
+        addToShoppingCart:(gid)=>{
+            dispatch(actionCreators.addGoodsToShoppingCart(gid))
+        },
+        addCollect:(gid)=>{
+            dispatch(actionCreators.addCollect(gid))
+        }
     }
 }
 

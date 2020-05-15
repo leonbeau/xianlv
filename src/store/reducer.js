@@ -24,7 +24,8 @@ const defaultState = fromJS({
     adminOrderList:[],
     customerOrderList:[],
     salemanOrderList:[],
-    allExpressOrder:[]
+    allExpressOrder:[],
+    allCollectOrder:[]
 });
 
 export default (state = defaultState, action) => {
@@ -103,7 +104,9 @@ export default (state = defaultState, action) => {
         case actionTypes.SALEMAN_ORDER_LIST:
             return state.set('salemanOrderList',action.data);
         case actionTypes.ALL_EXPRESS_ORDER:
-            return state.set('allExpressOrder',action.data)
+            return state.set('allExpressOrder',action.data);
+        case actionTypes.ALL_COLLECT_ORDER:
+            return state.set('allCollectOrder',action.data)
         default:
             return state;
     }

@@ -11,6 +11,7 @@ import AddNewGoods from './Page/AddNewGoods';
 import IamCustomer from './Page/IamCustomer';
 import IamSaleman from './Page/IamSaleman';
 import Express from './Page/Express';
+import Collect from './Page/Collect';
 import Order from './Page/Order';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import { message } from 'antd';
@@ -114,6 +115,20 @@ function App() {
             if (isLogin) {
               return (
                 <Express />
+              )
+            } else {
+              message.warning('请登录后查看')
+              return (
+                <Redirect to="/" />
+              )
+            }
+          }} />
+
+        <Route exact path="/collect" render={
+          () => {
+            if (isLogin) {
+              return (
+                <Collect />
               )
             } else {
               message.warning('请登录后查看')

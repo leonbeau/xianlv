@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import * as actionCreators from '../../store/actionCreator';
-import './ExpressMain.css';
-class IamSalemanMain extends Component {
+import './CollectMain.css';
+class IamCustomerMain extends Component {
 
     render() {
         return (
@@ -17,49 +17,36 @@ class IamSalemanMain extends Component {
                     <div className="myorder_content">
                         {/* 该区域名 */}
                         <div className="myorder_title">
-                            订单列表(物流信息)
+                            收藏商品列表
                         </div>
 
                         {
-                            this.props.allExpressOrder.map((item, index) => {
+                            this.props.allCollectOrder.map((item, index) => {
                                 return (
                                     <>
                                         {/* 一个订单 */}
 
                                         <div className="single_order" key={item.gid}>
                                             {/* 图片 */}
-
+                                            <span className="order_food_picture">
+                                                <img src={"http://120.79.56.242:8080/" + item.path} />
+                                            </span>
                                             <div className="order_other_things">
                                                 {/* 名称时间数量 */}
                                                 <span className="order_message">
-                                                    <div className="single_order_name">{item.username}</div>
-
+                                                    <div className="single_order_name">{item.name}</div>
+                                                    <div className="single_order_time">类型: {item.type}</div>
                                                     <div className="single_order_mount">数量: {item.sum}</div>
-                                                    <div className="single_order_mount">总价: ￥{item.money}</div>
-                                                    <div className="single_order_mount">卖家: {item.usernames}</div>
-                                                    <div className="single_order_mount">买家: {item.username}</div>
+                                                    <div className="single_order_mount">总价: ￥{item.price}</div>
                                                 </span>
                                                 {/* 总价 */}
                                                 <span className="order_total_price">
-                                                    物流状态:
-                                                {
-                                                        item.status === 0 ? '未发货' : ''
-                                                    }
-                                                    {
-                                                        item.status === 1 ? '已发货' : ''
-                                                    }
-                                                    {
-                                                        item.status === 2 ? '卖家拒绝发货' : ''
-                                                    }
-                                                    {
-                                                        item.status === 3 ? '买家收到货' : ''
-                                                    }
+                                                    备注: {item.beizhu}
 
                                                 </span>
                                                 {/* 状态 */}
                                                 <span className="order_status">
-
-                                                    <Button onClick={() => this.props.removeOrder(item.gid)} size="small" type="danger">删除订单</Button>
+                                                    <Button onClick={() => this.props.deleteCollectOrder(item.gid)} type="danger">删除收藏</Button>
                                                 </span>
                                             </div>
 
@@ -82,24 +69,23 @@ class IamSalemanMain extends Component {
         )
     }
     componentDidMount() {
-        this.props.getAllOrderExpress()
+        this.props.getCollectOrders()
     }
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        allExpressOrder: state.get('allExpressOrder')
+        allCollectOrder: state.get('allCollectOrder')
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         // 新的
-        getAllOrderExpress: () => {
-            dispatch(actionCreators.getAllOrderExpress())
+        getCollectOrders: () => {
+            dispatch(actionCreators.getCollectOrders())
         },
-        removeOrder: (gid) => {
-            dispatch(actionCreators.removeOrder(gid));
-        },
-
+        deleteCollectOrder: (gid) => {
+            dispatch(actionCreators.deleteCollectOrder(gid))
+        }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(IamSalemanMain);
+export default connect(mapStateToProps, mapDispatchToProps)(IamCustomerMain);

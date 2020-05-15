@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';
 class SingleCard extends Component {
     addToShoppingCart(gid){
-        console.log('addToShoppingCart gid'+gid);
+        // console.log('addToShoppingCart gid'+gid);
         this.props.addGoodsToShoppingCart(gid)
     }
     render() {

@@ -77,6 +77,7 @@ class Header extends Component {
                                     {/* <Menu.ItemGroup> */}
                                         <Menu.Item key="setting:3" style={{textAlign:"center"}}><Link to="/me">我的主页</Link></Menu.Item>
                                         <Menu.Item key="setting:4" style={{textAlign:"center"}}><Link to="/publish">我的发布</Link></Menu.Item>
+                                        <Menu.Item key="setting:10" style={{textAlign:"center"}}><Link to="/collect">我的收藏</Link></Menu.Item>
                                         <Menu.Item key="setting:5" style={{textAlign:"center"}}><Link to="/customer">我是买家</Link></Menu.Item>
                                         <Menu.Item key="setting:6" style={{textAlign:"center"}}><Link to="/saleman">我是卖家</Link></Menu.Item>
                                        

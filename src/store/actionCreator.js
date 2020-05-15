@@ -916,7 +916,7 @@ export const disagreeOrder = (did) => {
         }).then((res) => {
             if(res.data === 'success'){
                 message.success('不同意订单成功');
-                history.push('/#/customer');
+                history.push('/#/saleman');
                 setTimeout(() => history.go(), 1600);
             }
         }).catch((error) => {
@@ -986,6 +986,71 @@ export const removeOrder = (gid) => {
             }
         }).catch((error) => {
             message.error('删除订单失败', error);
+        })
+    }
+}
+//加入收藏夹
+export const addCollect = (gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/addCollection?gid='+gid,
+        }).then((res) => {
+            if(res.data === 'success'){
+                message.success('添加收藏成功');
+                history.push('/#/foodDetail/'+gid);
+                setTimeout(() => history.go(), 1600);
+            }
+        }).catch((error) => {
+            message.error('添加收藏失败', error);
+        })
+    }
+}
+
+//查看收藏列表
+
+export const allCollectOrdersList = (orderlist) => ({
+    type: actionTypes.ALL_COLLECT_ORDER,
+    data: orderlist
+})
+export const getCollectOrders = () => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/api/getCollection',
+        }).then((res) => {
+            console.log(res.data);
+            dispatch(allCollectOrdersList(res.data))
+
+        }).catch((error) => {
+            message.error('获取收藏列表失败', error);
+        })
+    }
+}
+
+//删除收藏
+export const deleteCollectOrder = (gid) => {
+    return (dispatch) => {
+        axios({
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: 'api/deleteCollection?gid='+gid,
+        }).then((res) => {
+            if(res.data === 'success'){
+                message.success('删除收藏成功');
+                history.push('/#/collect');
+                setTimeout(() => history.go(), 1600);
+            }
+        }).catch((error) => {
+            message.error('删除收藏失败', error);
         })
     }
 }

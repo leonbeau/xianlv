@@ -34,14 +34,32 @@ class IamCustomerMain extends Component {
                                             <div className="order_other_things">
                                                 {/* 名称时间数量 */}
                                                 <span className="order_message">
-                                                    <div className="single_order_name">{item.goods.name}</div>
+                                                <div className="single_order_name">{item.goods.name}</div>
                                                     <div className="single_order_time">类型: {item.goods.type}</div>
                                                     <div className="single_order_mount">数量: {item.goods.sum}</div>
-                                                    <div className="single_order_mount">总价: ￥{item.goods.price}</div>
+                                                    <div className="single_order_mount">类型:{item.goods.type}</div>
+                                                    <div className="single_order_mount">单价: ￥{item.goods.price}</div>
+                                                    <div className="single_order_mount">总价: ￥{item.danzi.money}</div>
                                                 </span>
                                                 {/* 总价 */}
                                                 <span className="order_total_price">
+                                                买家:{item.danzi.usernames}
+                                                <br/>
                                                 备注: {item.goods.beizhu}
+                                                <br/>
+                                                物流状态:
+                                                {
+                                                        item.danzi.status === 0 ? '未发货' : ''
+                                                    }
+                                                    {
+                                                        item.danzi.status === 1 ? '已发货' : ''
+                                                    }
+                                                    {
+                                                        item.danzi.status === 2 ? '卖家拒绝发货' : ''
+                                                    }
+                                                    {
+                                                        item.danzi.status === 3 ? '买家收到货' : ''
+                                                    }
                                                    
                                                 </span>
                                                 {/* 状态 */}
