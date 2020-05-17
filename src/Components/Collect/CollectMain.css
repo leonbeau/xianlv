@@ -72,10 +72,9 @@
         padding: 0 3rem;
     }
 
-    .single_order .order_other_things .order_status{
+    .single_order .order_other_things .order_status_collect{
         width: 25%;
         text-align: left;
-        padding: 0 3rem;
     }
    
     /* 我的订单样式结束 */

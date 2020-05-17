@@ -22,6 +22,11 @@ class SingleFoodMessage extends Component {
                             <div className="food_name">{this.props.goods.name}</div>
                             <div className="user_star">类型：{this.props.goods.type}</div>
                             <div className="user_star">剩余：{this.props.goods.sum}</div>
+
+                            <div className="user_star">卖家微信：{this.props.goods.vx}</div>
+                            <div className="user_star">买家QQ：{this.props.goods.qq}</div>
+                            <div className="user_star">买家电话：{this.props.goods.phone}</div>
+
                             <div className="food_details">{this.props.goods.beizhu}</div>
                             <div className="unit_price_and_btn">
 

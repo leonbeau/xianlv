@@ -45,8 +45,9 @@ class IamCustomerMain extends Component {
 
                                                 </span>
                                                 {/* 状态 */}
-                                                <span className="order_status">
-                                                    <Button onClick={() => this.props.deleteCollectOrder(item.gid)} type="danger">删除收藏</Button>
+                                                <span className="order_status_collect">
+                                                    <Button onClick={()=>this.props.addToShoppingCart(item.gid)} size="small" style={{margin:"0 8px"}} >加入购物车</Button>
+                                                    <Button onClick={() => this.props.deleteCollectOrder(item.gid)} size="small" type="danger">删除收藏</Button>
                                                 </span>
                                             </div>
 
@@ -85,7 +86,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         deleteCollectOrder: (gid) => {
             dispatch(actionCreators.deleteCollectOrder(gid))
-        }
+        },
+        addToShoppingCart:(gid)=>{
+            dispatch(actionCreators.addGoodsToShoppingCart(gid))
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(IamCustomerMain);
