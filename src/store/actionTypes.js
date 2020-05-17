@@ -49,3 +49,5 @@ export const SALEMAN_ORDER_LIST = 'saleman_order_list';
 export const ALL_EXPRESS_ORDER = 'all_express_order';
 //查看收藏的列表
 export const ALL_COLLECT_ORDER = 'all_collect_list';
+//主页右侧商品列表骨架屏状态
+export const HOME_GOODS_LIST_SKELETON_STATE = 'home_goods_list_skeleton_state'

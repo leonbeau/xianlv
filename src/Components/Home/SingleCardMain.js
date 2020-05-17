@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './SingleCardMain.css';
-import {Pagination} from 'antd'
+import { Skeleton,Button } from 'antd'
 import SingleCard from './SingleCard';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actionCreator';
 
 
@@ -14,17 +14,17 @@ class SingleCardMain extends Component {
             <>
 
                 <div className="Cards">
-                
-                    {this.props.homeDishesList.map((item, index) => {
-                        
-                        return (
-                            <SingleCard key={index} item={item} />
-                        )
+                    <Skeleton active  paragraph={{ rows: 22 }} title loading={this.props.homeGoodsListSkeletonState} >
+                        {this.props.homeDishesList.map((item, index) => {
 
-                    })}
+                            return (
+                                <SingleCard key={index} item={item} />
+                            )
+
+                        })}
 
 
-
+                    </Skeleton>
                 </div>
 
                 {/* 分页 */}
@@ -33,11 +33,12 @@ class SingleCardMain extends Component {
                     <Pagination defaultCurrent={1} pageSize={9} total={this.props.totalPage} />
                 </div>
                 </div> */}
+
             </>
         )
     }
 
-    componentDidMount(){
+    componentDidMount() {
         //获取所有菜品
         this.props.getFirstPageGoods();
         // //获取所有的分类
@@ -49,19 +50,16 @@ class SingleCardMain extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         homeDishesList: state.get('homeDishesList'),
-        totalPage:state.get('totalPage')
+        totalPage: state.get('totalPage'),
+        homeGoodsListSkeletonState:state.get('homeGoodsListSkeletonState')
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getFirstPageGoods:() => {
+        getFirstPageGoods: () => {
             dispatch(actionCreators.getFirstPageGoods())
-        },
-        // //获取所有的类别
-        // getAllCategories: () => {
-        //     dispatch(actionCreators.getAllCategories())
-        // }
+        }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps) (SingleCardMain);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCardMain);

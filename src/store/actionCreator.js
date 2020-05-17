@@ -533,7 +533,8 @@ export const editPublishGoods = (goodsObject, gid) => {
 export const saveTotalMount = (totalPage) => ({
     type: actionTypes.TOTAL_PAGE,
     data: totalPage
-})
+});
+
 export const getFirstPageGoods = () => {
     return (dispatch) => {
         axios({
@@ -543,9 +544,11 @@ export const getFirstPageGoods = () => {
             },
             url: '/api/getGoods?page=1',
         }).then((res) => {
+            dispatch(changeSkeletonStateTofalse());
             const goodsLength = res.data.length;
             dispatch(saveTotalMount(goodsLength))
             dispatch(getSelectKeyDishesList(res.data));
+
         }).catch((error) => {
             message.error('获取失败：', error);
         })
@@ -559,6 +562,10 @@ export const getSelectKeyDishesList = (dishesData) => ({
     type: actionTypes.HOME_DISHES_LIST,
     data: dishesData
 })
+//改变骨架屏状态
+export const changeSkeletonStateTofalse = ()=>({
+    type: actionTypes.HOME_GOODS_LIST_SKELETON_STATE,
+})
 
 export const changeHomeDishesList = (selectKey) => {
     return (dispatch) => {
@@ -569,8 +576,12 @@ export const changeHomeDishesList = (selectKey) => {
             },
             url: '/api/getGoodsByType?type=' + selectKey + '&page=1',
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
+            //改变骨架屏状态
+            dispatch(changeSkeletonStateTofalse())
             dispatch(getSelectKeyDishesList(res.data));
+           
+            
 
         }).catch((error) => {
             message.error('获取失败：', error);

@@ -3,6 +3,11 @@
     text-align: left;
    /* height: 51rem;
    overflow: auto; */
+   padding: 0 0 0 24px;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-between;
 }
 
 
